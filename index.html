@@ -766,6 +766,7 @@ private struct NumberRow: View {
             Text(label).foregroundStyle(color)
             Spacer()
             TextField(&quot;—&quot;, text: $text)
+                .accessibilityIdentifier(&quot;field.\(label)&quot;)
                 .keyboardType(decimal ? .decimalPad : .numberPad)
                 .multilineTextAlignment(.trailing)
                 .frame(width: 90)
@@ -860,7 +861,7 @@ private struct ActivityView: UIViewControllerRepresentable {
 </main>
 
 <footer>
-  <main style="padding-top:0">Круг · дизайн-система · сборка 6b4f4c9 · <a href="https://github.com/novanikita/krug">github.com/novanikita/krug</a></main>
+  <main style="padding-top:0">Круг · дизайн-система · <a href="https://github.com/novanikita/krug">github.com/novanikita/krug</a></main>
 </footer>
 
 <script src="app.js"></script>
