@@ -84,7 +84,7 @@ details.code pre { margin-top: 10px; max-height: 480px; }
 /* Diary line: "name amount" and the number, title3 (20pt) at default size. */
 .k-line { display: flex; align-items: baseline; gap: 16px; padding: 5px 24px; font-size: 20px; line-height: 1.3; }
 .k-line .name { flex: 1; }
-.k-line .num { font-variant-numeric: tabular-nums; color: var(--kcal); }
+.k-line .num { font-variant-numeric: tabular-nums; color: var(--kcalInk); }
 .k-line.ghost .typed { color: var(--text); }
 .k-line.ghost .rest { color: var(--textTertiary); }
 .k-line .placeholder { color: var(--textTertiary); }
@@ -107,7 +107,7 @@ details.code pre { margin-top: 10px; max-height: 480px; }
 .k-rings { display: block; width: 100%; height: auto; }
 .k-rings-label { text-align: center; font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1.25; }
 .k-rings-label i { font-style: normal; }
-.k-rings-label .kcal { color: var(--kcal); } .k-rings-label .p { color: var(--protein); } .k-rings-label .f { color: var(--fat); } .k-rings-label .c { color: var(--carbs); }
+.k-rings-label .kcal { color: var(--kcalInk); } .k-rings-label .p { color: var(--proteinInk); } .k-rings-label .f { color: var(--fatInk); } .k-rings-label .c { color: var(--carbsInk); }
 
 /* Tile */
 .k-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 16px; }
@@ -128,7 +128,7 @@ details.code pre { margin-top: 10px; max-height: 480px; }
 .k-row .val { margin-left: auto; font-variant-numeric: tabular-nums; }
 .k-row .unit { color: var(--textSecondary); }
 .k-row .tag { color: var(--textTertiary); }
-.k-row.protein .lbl { color: var(--protein); } .k-row.fat .lbl { color: var(--fat); } .k-row.carbs .lbl { color: var(--carbs); } .k-row.kcal .lbl { color: var(--kcal); }
+.k-row.protein .lbl { color: var(--proteinInk); } .k-row.fat .lbl { color: var(--fatInk); } .k-row.carbs .lbl { color: var(--carbsInk); } .k-row.kcal .lbl { color: var(--kcalInk); }
 
 /* Own-food sheet fields */
 .k-fields { display: flex; gap: 12px; padding: 0 20px; }

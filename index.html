@@ -54,29 +54,43 @@
 <tr><td><code>surface</code></td><td><span class="plate" style="background:#FFFFFF"></span><code>#FFFFFF</code></td><td><span class="plate" style="background:#1C1C1E"></span><code>#1C1C1E</code></td><td>Поверхность: плитки, шторки, строки списка</td></tr>
 <tr><td><code>surfaceMuted</code></td><td><span class="plate" style="background:#EDEDF0"></span><code>#EDEDF0</code></td><td><span class="plate" style="background:#2C2C2E"></span><code>#2C2C2E</code></td><td>Приглушённая поверхность: дорожка пилюли</td></tr>
 <tr><td><code>text</code></td><td><span class="plate" style="background:#111114"></span><code>#111114</code></td><td><span class="plate" style="background:#FFFFFF"></span><code>#FFFFFF</code></td><td>Основной текст</td></tr>
-<tr><td><code>textSecondary</code></td><td><span class="plate" style="background:#6E6E76"></span><code>#6E6E76</code></td><td><span class="plate" style="background:#9A9A9E"></span><code>#9A9A9E</code></td><td>Второстепенный текст: подписи, статусы</td></tr>
-<tr><td><code>textTertiary</code></td><td><span class="plate" style="background:#A5A5AD"></span><code>#A5A5AD</code></td><td><span class="plate" style="background:#6B6B70"></span><code>#6B6B70</code></td><td>Третьестепенный: подсказка в строке, плейсхолдер, бренд в списке</td></tr>
-<tr><td><code>accent</code></td><td><span class="plate" style="background:#3B6CF6"></span><code>#3B6CF6</code></td><td><span class="plate" style="background:#5C8CFF"></span><code>#5C8CFF</code></td><td>Акцент: ссылки, активный микрофон, выбранный день в меню</td></tr>
+<tr><td><code>textSecondary</code></td><td><span class="plate" style="background:#696971"></span><code>#696971</code></td><td><span class="plate" style="background:#9A9A9E"></span><code>#9A9A9E</code></td><td>Второстепенный текст: подписи, статусы</td></tr>
+<tr><td><code>textTertiary</code></td><td><span class="plate" style="background:#858590"></span><code>#858590</code></td><td><span class="plate" style="background:#6B6B70"></span><code>#6B6B70</code></td><td>Третьестепенный: подсказка в строке, плейсхолдер, бренд в списке</td></tr>
+<tr><td><code>accent</code></td><td><span class="plate" style="background:#235AF5"></span><code>#235AF5</code></td><td><span class="plate" style="background:#6A99FF"></span><code>#6A99FF</code></td><td>Акцент: ссылки, активный микрофон, выбранный день в меню</td></tr>
 <tr><td><code>kcal</code></td><td><span class="plate" style="background:#5DB523"></span><code>#5DB523</code></td><td><span class="plate" style="background:#92CF2C"></span><code>#92CF2C</code></td><td>Калории: внешнее кольцо, буква К, число записи</td></tr>
 <tr><td><code>protein</code></td><td><span class="plate" style="background:#F2626C"></span><code>#F2626C</code></td><td><span class="plate" style="background:#FF7A82"></span><code>#FF7A82</code></td><td>Белки: второе кольцо, буква Б</td></tr>
 <tr><td><code>fat</code></td><td><span class="plate" style="background:#F2A63B"></span><code>#F2A63B</code></td><td><span class="plate" style="background:#FFB454"></span><code>#FFB454</code></td><td>Жиры: третье кольцо, буква Ж</td></tr>
 <tr><td><code>carbs</code></td><td><span class="plate" style="background:#4E8AF4"></span><code>#4E8AF4</code></td><td><span class="plate" style="background:#6B9FFF"></span><code>#6B9FFF</code></td><td>Углеводы: внутреннее кольцо, буква У</td></tr>
+<tr><td><code>kcalInk</code></td><td><span class="plate" style="background:#3D7717"></span><code>#3D7717</code></td><td><span class="plate" style="background:#92CF2C"></span><code>#92CF2C</code></td><td>Калории текстом: число записи, буква К, Ккал в центре колец, плитка</td></tr>
+<tr><td><code>proteinInk</code></td><td><span class="plate" style="background:#D2111F"></span><code>#D2111F</code></td><td><span class="plate" style="background:#FF7A82"></span><code>#FF7A82</code></td><td>Белки текстом</td></tr>
+<tr><td><code>fatInk</code></td><td><span class="plate" style="background:#975C0A"></span><code>#975C0A</code></td><td><span class="plate" style="background:#FFB454"></span><code>#FFB454</code></td><td>Жиры текстом</td></tr>
+<tr><td><code>carbsInk</code></td><td><span class="plate" style="background:#0F5FEC"></span><code>#0F5FEC</code></td><td><span class="plate" style="background:#6B9FFF"></span><code>#6B9FFF</code></td><td>Углеводы текстом</td></tr>
     </tbody>
   </table>
   <div class="rule"><b>Дорожка кольца — его же цвет, приглушённый.</b> Незаполненная часть кольца — это тот же оттенок с прозрачностью 20% в светлой теме и 28% в тёмной (<code>Palette.track</code>). Отдельного «серого» для дорожек нет: пустое кольцо читается как «то же кольцо, ещё не заполненное».</div>
   <div class="rule"><b>Четыре цвета — четыре величины.</b> Зелёный всегда калории, красный — белки, оранжевый — жиры, синий — углеводы. В кольцах, буквах К/Б/Ж/У, числах записей, плитках и полях шторки — везде одно соответствие.</div>
+  <div class="rule"><b>Заливка и чернила.</b> У каждой величины два токена: заливка (<code>kcal</code>) для колец и бегунка и чернила (<code>kcalInk</code>) для той же величины, написанной текстом. В тёмной теме это один цвет; в светлой заливки слишком бледны для текста (зелёный на фоне — 2,4:1), и чернила темнее. Любой текст в приложении читается с контрастом не ниже 4,5:1 на любом фоне, серая подсказка — не ниже 3:1; это проверяет тест <code>ContrastTests</code>, и падает, если кто-то сделает цвет слабее.</div>
   <details class="code"><summary>Код · <code>UI/Palette.swift</code></summary><pre><code>enum Palette {
     static let bg = dynamic(0xF5F5F7, 0x000000)
     static let surface = dynamic(0xFFFFFF, 0x1C1C1E)
     static let surfaceMuted = dynamic(0xEDEDF0, 0x2C2C2E)
     static let text = dynamic(0x111114, 0xFFFFFF)
-    static let textSecondary = dynamic(0x6E6E76, 0x9A9A9E)
-    static let textTertiary = dynamic(0xA5A5AD, 0x6B6B70)
-    static let accent = dynamic(0x3B6CF6, 0x5C8CFF)
+    static let textSecondary = dynamic(0x696971, 0x9A9A9E)
+    static let textTertiary = dynamic(0x858590, 0x6B6B70)
+    static let accent = dynamic(0x235AF5, 0x6A99FF)
+    // The four values: a fill (rings, the pill&#x27;s thumb) and an ink for the
+    // same value written as text. In the dark theme one colour does both;
+    // in the light theme the fills are too pale to read (kcal green on
+    // #F5F5F7 is 2.4:1), so the inks are darker — 4.5:1 or more on every
+    // background, like all text here (KrugTests/ContrastTests).
     static let kcal = dynamic(0x5DB523, 0x92CF2C)
     static let protein = dynamic(0xF2626C, 0xFF7A82)
     static let fat = dynamic(0xF2A63B, 0xFFB454)
     static let carbs = dynamic(0x4E8AF4, 0x6B9FFF)
+    static let kcalInk = dynamic(0x3D7717, 0x92CF2C)
+    static let proteinInk = dynamic(0xD2111F, 0xFF7A82)
+    static let fatInk = dynamic(0x975C0A, 0xFFB454)
+    static let carbsInk = dynamic(0x0F5FEC, 0x6B9FFF)
 
     /// A ring&#x27;s unfilled track: its own hue, dimmed.
     static func track(_ ring: Color, dark: Bool) -&gt; Color { ring.opacity(dark ? 0.28 : 0.2) }
@@ -191,9 +205,10 @@
   <div class="component">
     <div class="sample phone">
       <div class="k-line"><span class="name">Сырники 2 порции</span><span class="num">516</span></div>
+      <!-- numbers and letters use the inks; the rings below use the fills -->
       <div class="k-line"><span class="name">Творог 5% 150 грамм</span><span class="num">182</span></div>
       <div class="k-line"><span class="name">Рис с куриной бризолью 1 порция</span><span class="num">394</span></div>
-      <div class="k-line"><span class="name">Куриная грудка отварная 150 грамм</span><span class="num" style="color:var(--protein)">46</span></div>
+      <div class="k-line"><span class="name">Куриная грудка отварная 150 грамм</span><span class="num" style="color:var(--proteinInk)">46</span></div>
     </div>
     <div class="notes">
       <p>Одна строка — одна запись: название и количество словами, число справа. Число — калории, или белки/жиры/углеводы, если переключить букву в шапке; цвет числа следует за величиной.</p>
@@ -487,8 +502,8 @@ struct StadiumShape: Shape {
                 StadiumRing(progress: ratio(total.carbs, targets.carbs), color: Palette.carbs),
             ]) {
                 VStack(spacing: 2) {
-                    Text(&quot;\(Text(&quot;Ккал&quot;).foregroundStyle(Palette.kcal)) \(formatKcal(total.kcal))&quot;)
-                    Text(&quot;\(Text(&quot;Б&quot;).foregroundStyle(Palette.protein)) \(formatGrams(total.protein))   \(Text(&quot;Ж&quot;).foregroundStyle(Palette.fat)) \(formatGrams(total.fat))   \(Text(&quot;У&quot;).foregroundStyle(Palette.carbs)) \(formatGrams(total.carbs))&quot;)
+                    Text(&quot;\(Text(&quot;Ккал&quot;).foregroundStyle(Palette.kcalInk)) \(formatKcal(total.kcal))&quot;)
+                    Text(&quot;\(Text(&quot;Б&quot;).foregroundStyle(Palette.proteinInk)) \(formatGrams(total.protein))   \(Text(&quot;Ж&quot;).foregroundStyle(Palette.fatInk)) \(formatGrams(total.fat))   \(Text(&quot;У&quot;).foregroundStyle(Palette.carbsInk)) \(formatGrams(total.carbs))&quot;)
                 }
                 .font(.title2.weight(.medium))
                 .monospacedDigit()
@@ -527,7 +542,8 @@ struct PeriodToggle: View {
                 Text(p.letter)
                     .font(.body.weight(.semibold))
                     .foregroundStyle(p == period ? Palette.bg : Palette.textSecondary)
-                    .frame(width: 46, height: 32)
+                    .padding(.horizontal, 8)
+                    .frame(minWidth: 46, minHeight: 32)
                     .background {
                         if p == period {
                             Capsule().fill(Palette.text).matchedGeometryEffect(id: &quot;thumb&quot;, in: thumb)
@@ -535,6 +551,7 @@ struct PeriodToggle: View {
                     }
                     .contentShape(Rectangle())
                     .onTapGesture { withAnimation(.snappy(duration: 0.22)) { period = p } }
+                    .accessibilityLabel(p.fullName)
                     .accessibilityAddTraits(p == period ? [.isButton, .isSelected] : .isButton)
             }
         }
@@ -551,10 +568,10 @@ struct PeriodToggle: View {
     <div class="sample phone" style="padding:20px 16px">
       <div style="padding:0 24px 20px"><svg class="k-rings" data-progress="[0.28,0.74,0.36,0.03]" data-stroke="24" data-gap="5"></svg></div>
       <div class="k-tiles">
-        <div class="k-tile"><div class="label">Калории</div><div><span class="value" style="color:var(--kcal)">556</span><span class="unit">ккал</span></div><div class="goal">цель 2000</div></div>
-        <div class="k-tile"><div class="label">Белки</div><div><span class="value" style="color:var(--protein)">74</span><span class="unit">г</span></div><div class="goal">цель 100</div></div>
-        <div class="k-tile"><div class="label">Жиры</div><div><span class="value" style="color:var(--fat)">25</span><span class="unit">г</span></div><div class="goal">цель 70</div></div>
-        <div class="k-tile"><div class="label">Углеводы</div><div><span class="value" style="color:var(--carbs)">7.5</span><span class="unit">г</span></div><div class="goal">цель 250</div></div>
+        <div class="k-tile"><div class="label">Калории</div><div><span class="value" style="color:var(--kcalInk)">556</span><span class="unit">ккал</span></div><div class="goal">цель 2000</div></div>
+        <div class="k-tile"><div class="label">Белки</div><div><span class="value" style="color:var(--proteinInk)">74</span><span class="unit">г</span></div><div class="goal">цель 100</div></div>
+        <div class="k-tile"><div class="label">Жиры</div><div><span class="value" style="color:var(--fatInk)">25</span><span class="unit">г</span></div><div class="goal">цель 70</div></div>
+        <div class="k-tile"><div class="label">Углеводы</div><div><span class="value" style="color:var(--carbsInk)">7.5</span><span class="unit">г</span></div><div class="goal">цель 250</div></div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:24px 0 0">
         <div style="text-align:center;font-size:12px;color:var(--textSecondary)">ср<svg class="k-rings" data-progress="[0.6,0.8,0.4,0.5]" data-stroke="16" data-gap="7" style="margin:6px 0"></svg>7</div>
@@ -630,6 +647,7 @@ func ringsFor(_ n: Nutrition, targets: Nutrition) -&gt; [StadiumRing] {
         .padding(.horizontal, 16)
         .padding(.vertical, 14)
         .background(Palette.surface, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .accessibilityElement(children: .combine)
     }</code></pre></details>
     </div>
   </div>
@@ -776,10 +794,10 @@ private struct ActivityView: UIViewControllerRepresentable {
       <div style="padding:0 20px 24px;font-size:20px">сырники</div>
       <div style="padding:0 20px 6px;font-size:15px;color:var(--textSecondary)">на 100 г</div>
       <div class="k-fields">
-        <div class="k-field"><div class="n">246</div><div class="l" style="color:var(--kcal)">Ккал</div></div>
-        <div class="k-field"><div class="n">12.4</div><div class="l" style="color:var(--protein)">Б</div></div>
-        <div class="k-field"><div class="n empty">0</div><div class="l" style="color:var(--fat)">Ж</div></div>
-        <div class="k-field"><div class="n empty">0</div><div class="l" style="color:var(--carbs)">У</div></div>
+        <div class="k-field"><div class="n">246</div><div class="l" style="color:var(--kcalInk)">Ккал</div></div>
+        <div class="k-field"><div class="n">12.4</div><div class="l" style="color:var(--proteinInk)">Б</div></div>
+        <div class="k-field"><div class="n empty">0</div><div class="l" style="color:var(--fatInk)">Ж</div></div>
+        <div class="k-field"><div class="n empty">0</div><div class="l" style="color:var(--carbsInk)">У</div></div>
       </div>
       <div class="k-row" style="margin-top:20px;border:0"><span class="lbl" style="font-size:15px;color:var(--textSecondary)">Вес порции, г</span><span class="val" style="color:var(--textTertiary)">—</span></div>
     </div>

@@ -4,13 +4,17 @@
   --surface: #ffffff;
   --surfaceMuted: #ededf0;
   --text: #111114;
-  --textSecondary: #6e6e76;
-  --textTertiary: #a5a5ad;
-  --accent: #3b6cf6;
+  --textSecondary: #696971;
+  --textTertiary: #858590;
+  --accent: #235af5;
   --kcal: #5db523;
   --protein: #f2626c;
   --fat: #f2a63b;
   --carbs: #4e8af4;
+  --kcalInk: #3d7717;
+  --proteinInk: #d2111f;
+  --fatInk: #975c0a;
+  --carbsInk: #0f5fec;
   --track-alpha: 0.2;
 }
 [data-theme=dark] {
@@ -20,10 +24,14 @@
   --text: #ffffff;
   --textSecondary: #9a9a9e;
   --textTertiary: #6b6b70;
-  --accent: #5c8cff;
+  --accent: #6a99ff;
   --kcal: #92cf2c;
   --protein: #ff7a82;
   --fat: #ffb454;
   --carbs: #6b9fff;
+  --kcalInk: #92cf2c;
+  --proteinInk: #ff7a82;
+  --fatInk: #ffb454;
+  --carbsInk: #6b9fff;
   --track-alpha: 0.28;
 }
