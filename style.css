@@ -1,0 +1,171 @@
+/* Круг · дизайн-система. The page is set in the app's own tokens
+   (tokens.css, generated from Palette.swift) so what you see here is what
+   the app shows. Vanilla CSS, no build step beyond tools/build.py. */
+
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Inter, system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --measure: 68ch;
+  --radius: 20px;
+  color-scheme: light dark;
+}
+[data-theme=light] { color-scheme: light; }
+[data-theme=dark] { color-scheme: dark; }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--text);
+  background: var(--bg);
+  letter-spacing: -0.01em;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { font-family: var(--mono); font-size: 0.88em; }
+pre { margin: 0; padding: 14px 16px; overflow: auto; background: var(--surfaceMuted); border-radius: 14px; font-size: 13px; line-height: 1.5; }
+pre code { font-size: inherit; }
+hr { border: 0; border-top: 1px solid var(--surfaceMuted); margin: 48px 0; }
+
+/* Page frame */
+.top {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; gap: 18px;
+  padding: 12px 24px;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border-bottom: 1px solid var(--surfaceMuted);
+}
+.top .brand { font-weight: 600; margin-right: auto; white-space: nowrap; }
+.top nav { display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; }
+.top nav a { color: var(--textSecondary); white-space: nowrap; font-size: 15px; }
+.top nav a:hover { color: var(--text); text-decoration: none; }
+.top .theme { border: 0; background: var(--surfaceMuted); color: var(--text); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 14px; cursor: pointer; }
+
+main { max-width: 1100px; margin: 0 auto; padding: 24px 24px 96px; }
+section { margin-top: 72px; scroll-margin-top: 72px; }
+h1 { font-size: 40px; line-height: 1.1; letter-spacing: -0.03em; font-weight: 600; margin: 32px 0 12px; }
+h2 { font-size: 28px; letter-spacing: -0.02em; font-weight: 600; margin: 0 0 8px; }
+h3 { font-size: 20px; font-weight: 600; margin: 40px 0 8px; }
+p, ul, ol { max-width: var(--measure); }
+.lead { font-size: 20px; color: var(--textSecondary); max-width: var(--measure); }
+.muted { color: var(--textSecondary); }
+.rule { border-left: 3px solid var(--accent); padding: 2px 0 2px 14px; margin: 14px 0; max-width: var(--measure); }
+.rule b { display: block; }
+
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--surfaceMuted); vertical-align: top; }
+th { color: var(--textSecondary); font-weight: 500; }
+.plate { display: inline-block; width: 22px; height: 22px; border-radius: 7px; vertical-align: middle; margin-right: 8px; border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
+
+/* Component showcase: name · live sample · notes */
+.component { display: grid; grid-template-columns: 1fr 1.1fr; gap: 28px; align-items: start; margin-top: 28px; }
+.component .notes { max-width: none; }
+.sample {
+  background: var(--bg);
+  border: 1px solid var(--surfaceMuted);
+  border-radius: var(--radius);
+  padding: 20px 0;
+  overflow: hidden;
+}
+.sample.phone { max-width: 402px; }
+.component.full { grid-template-columns: 1fr; }
+@media (max-width: 760px) { .component { grid-template-columns: 1fr; } }
+details.code { margin-top: 14px; }
+details.code summary { cursor: pointer; color: var(--textSecondary); font-size: 15px; }
+details.code pre { margin-top: 10px; max-height: 480px; }
+
+/* ---- The app's own pieces, as the app draws them ---------------------- */
+
+/* Diary line: "name amount" and the number, title3 (20pt) at default size. */
+.k-line { display: flex; align-items: baseline; gap: 16px; padding: 5px 24px; font-size: 20px; line-height: 1.3; }
+.k-line .name { flex: 1; }
+.k-line .num { font-variant-numeric: tabular-nums; color: var(--kcal); }
+.k-line.ghost .typed { color: var(--text); }
+.k-line.ghost .rest { color: var(--textTertiary); }
+.k-line .placeholder { color: var(--textTertiary); }
+.k-line .caret { display: inline-block; width: 2px; height: 1.1em; background: var(--accent); vertical-align: -0.18em; margin: 0 1px; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.k-tools { display: flex; gap: 14px; color: var(--textTertiary); }
+.k-status { padding: 12px 24px 0; font-size: 15px; color: var(--textSecondary); }
+.k-status a { display: block; margin-top: 6px; }
+.k-match { display: flex; gap: 8px; align-items: baseline; padding: 8px 24px; font-size: 17px; }
+.k-match .brand { color: var(--textTertiary); }
+.k-match .num { margin-left: auto; color: var(--textSecondary); font-variant-numeric: tabular-nums; }
+
+/* Pill: Д / Н / М */
+.k-pill { display: inline-flex; padding: 2px; border-radius: 999px; background: var(--surfaceMuted); }
+.k-pill span { width: 46px; height: 32px; display: grid; place-items: center; border-radius: 999px; font-size: 17px; font-weight: 600; color: var(--textSecondary); cursor: pointer; transition: color .22s; }
+.k-pill span.on { background: var(--text); color: var(--bg); }
+
+/* Rings */
+.k-stadium { display: block; width: 100%; height: 212px; }
+.k-rings { display: block; width: 100%; height: auto; }
+.k-rings-label { text-align: center; font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1.25; }
+.k-rings-label i { font-style: normal; }
+.k-rings-label .kcal { color: var(--kcal); } .k-rings-label .p { color: var(--protein); } .k-rings-label .f { color: var(--fat); } .k-rings-label .c { color: var(--carbs); }
+
+/* Tile */
+.k-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 16px; }
+.k-tile { background: var(--surface); border-radius: 20px; padding: 14px 16px; }
+.k-tile .label { font-size: 15px; color: var(--textSecondary); }
+.k-tile .value { font-size: 28px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.k-tile .unit { font-size: 15px; color: var(--textSecondary); margin-left: 4px; }
+.k-tile .goal { font-size: 13px; color: var(--textSecondary); }
+
+/* Undo bar */
+.k-undo { display: flex; align-items: center; margin: 0 16px; padding: 14px 20px; border-radius: 999px; background: color-mix(in srgb, var(--surface) 80%, transparent); backdrop-filter: blur(20px); border: 1px solid var(--surfaceMuted); }
+.k-undo b { margin-left: auto; color: var(--accent); font-weight: 600; }
+
+/* Settings row and list row */
+.k-group { margin: 0 16px; background: var(--surface); border-radius: 12px; overflow: hidden; }
+.k-row { display: flex; align-items: center; gap: 8px; padding: 12px 16px; font-size: 17px; border-bottom: 1px solid var(--surfaceMuted); }
+.k-row:last-child { border-bottom: 0; }
+.k-row .val { margin-left: auto; font-variant-numeric: tabular-nums; }
+.k-row .unit { color: var(--textSecondary); }
+.k-row .tag { color: var(--textTertiary); }
+.k-row.protein .lbl { color: var(--protein); } .k-row.fat .lbl { color: var(--fat); } .k-row.carbs .lbl { color: var(--carbs); } .k-row.kcal .lbl { color: var(--kcal); }
+
+/* Own-food sheet fields */
+.k-fields { display: flex; gap: 12px; padding: 0 20px; }
+.k-field { flex: 1; }
+.k-field .n { font-size: 30px; line-height: 1.1; }
+.k-field .n.empty { color: var(--textTertiary); }
+.k-field .l { font-size: 15px; margin-top: 2px; }
+
+/* Type specimens */
+.type-row { display: grid; grid-template-columns: 170px 1fr; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--surfaceMuted); }
+.type-row .meta { font-size: 13px; color: var(--textSecondary); font-family: var(--mono); }
+
+/* Spacing scale */
+.scale { display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; }
+.scale div { text-align: center; font-size: 12px; color: var(--textSecondary); font-family: var(--mono); }
+.scale i { display: block; background: var(--accent); border-radius: 3px; margin: 0 auto 6px; }
+
+/* Motion demos */
+.motion { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 760px) { .motion { grid-template-columns: 1fr; } }
+.demo { background: var(--surface); border-radius: 16px; padding: 16px; cursor: pointer; }
+.demo .what { font-weight: 600; }
+.demo .how { font-size: 13px; color: var(--textSecondary); font-family: var(--mono); margin: 2px 0 12px; }
+.demo .stage { height: 44px; position: relative; }
+.demo .ball { position: absolute; left: 0; top: 10px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); }
+.demo.play .ball.snappy { transition: transform .25s cubic-bezier(.2,.9,.3,1.05); transform: translateX(220px); }
+.demo.play .ball.ease35 { transition: transform .35s cubic-bezier(.22,.61,.36,1); transform: translateX(220px); }
+.demo.play .ball.ease65 { transition: transform .65s cubic-bezier(.22,.61,.36,1); transform: translateX(220px); }
+.demo.play .ball.ease22 { transition: transform .22s cubic-bezier(.2,.9,.3,1.05); transform: translateX(220px); }
+
+/* Icons table */
+.icons td:first-child { font-family: var(--mono); font-size: 13px; }
+
+footer { margin-top: 96px; color: var(--textSecondary); font-size: 14px; }
+
+/* Narrow screens: tables scroll sideways rather than squeeze */
+@media (max-width: 600px) {
+  table { display: block; overflow-x: auto; white-space: nowrap; }
+  table td:last-child { white-space: normal; min-width: 220px; }
+}

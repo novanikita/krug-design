@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Круг · дизайн-система</title>
+<meta name="description" content="Цвета, шрифт, отступы, движение и компоненты приложения Круг — с живыми примерами и кодом из приложения.">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <span class="brand">Круг · дизайн-система</span>
+  <nav>
+    <a href="#intro">Начало</a>
+    <a href="#color">Цвет</a>
+    <a href="#type">Шрифт</a>
+    <a href="#space">Отступы и форма</a>
+    <a href="#motion">Движение</a>
+    <a href="#components">Компоненты</a>
+    <a href="#icons">Иконки</a>
+    <a href="#howto">Как править</a>
+  </nav>
+  <button class="theme" type="button">Тема</button>
+</header>
+
+<main>
+
+<section id="intro" style="margin-top:0">
+  <h1>Как выглядит и ведёт себя Круг</h1>
+  <p class="lead">Одна страница — и инструкция, и живой пример. Цвета здесь берутся из того же файла, что и в приложении, а под каждым компонентом лежит его настоящий код. Если на этой странице что-то не так, значит, в приложении тоже.</p>
+  <p>Круг — дневник еды, в котором запись занимает секунды: одна строка «название количество», одна подсказка, Enter. Всё остальное на экране подчинено этой строке. Дизайн-система описывает, из чего она и окружение собраны, и какие правила нельзя нарушать, чтобы приложение оставалось быстрым и ощущалось родным на iPhone.</p>
+
+  <h3>Четыре критерия</h3>
+  <p>Из <code>goal.md</code>: быстрота использования, эстетическое удовольствие, простота поиска, надёжность без интернета. Любое решение проверяется этими четырьмя.</p>
+
+  <h3>Правила, которые уже приняты</h3>
+  <div class="rule"><b>Запись — плоский список.</b> Никаких завтраков и обедов: это лишний тап в самом частом сценарии. Время записи хранится, но не показывается.</div>
+  <div class="rule"><b>Одна подсказка, не список.</b> Строка ввода дописывает набранное серым, как адресная строка браузера. Список совпадений появляется только по просьбе: тап по серому тексту или свайп вниз по строке.</div>
+  <div class="rule"><b>Строка читается как предложение.</b> «Творог 5% 150 грамм», единицы полными словами с согласованием, число справа — табличными цифрами.</div>
+  <div class="rule"><b>Никаких приблизительных КБЖУ.</b> Если у продукта нет данных — справочный «средний» продукт того же типа, а не догадка.</div>
+  <div class="rule"><b>Системные элементы — системные.</b> Поле ввода, клавиатура, листы действий, меню по долгому нажатию, навигация — родные iOS, без копий. Своё рисуем только там, где у системы этого нет: кольца, пилюля, подсказка.</div>
+  <div class="rule"><b>Иерархия — цветом, не весом.</b> Второстепенный текст отличается оттенком (<code>textSecondary</code>, <code>textTertiary</code>), как в самом iOS, а не более тонким начертанием.</div>
+</section>
+
+<section id="color">
+  <h2>Цвет</h2>
+  <p>Две темы, одни имена. Тёмная — не инверсия светлой, а своя палитра по образцу iOS: почти чёрный фон, поверхности <code>#1C1C1E</code>, притушенный второстепенный текст, оттенки макросов чуть светлее, чтобы читались на чёрном. Переключите тему кнопкой в шапке — вся страница перекрасится теми же токенами.</p>
+  <table>
+    <thead><tr><th>Токен</th><th>Светлая</th><th>Тёмная</th><th>Где</th></tr></thead>
+    <tbody>
+<tr><td><code>bg</code></td><td><span class="plate" style="background:#F5F5F7"></span><code>#F5F5F7</code></td><td><span class="plate" style="background:#000000"></span><code>#000000</code></td><td>Фон экрана</td></tr>
+<tr><td><code>surface</code></td><td><span class="plate" style="background:#FFFFFF"></span><code>#FFFFFF</code></td><td><span class="plate" style="background:#1C1C1E"></span><code>#1C1C1E</code></td><td>Поверхность: плитки, шторки, строки списка</td></tr>
+<tr><td><code>surfaceMuted</code></td><td><span class="plate" style="background:#EDEDF0"></span><code>#EDEDF0</code></td><td><span class="plate" style="background:#2C2C2E"></span><code>#2C2C2E</code></td><td>Приглушённая поверхность: дорожка пилюли</td></tr>
+<tr><td><code>text</code></td><td><span class="plate" style="background:#111114"></span><code>#111114</code></td><td><span class="plate" style="background:#FFFFFF"></span><code>#FFFFFF</code></td><td>Основной текст</td></tr>
+<tr><td><code>textSecondary</code></td><td><span class="plate" style="background:#6E6E76"></span><code>#6E6E76</code></td><td><span class="plate" style="background:#9A9A9E"></span><code>#9A9A9E</code></td><td>Второстепенный текст: подписи, статусы</td></tr>
+<tr><td><code>textTertiary</code></td><td><span class="plate" style="background:#A5A5AD"></span><code>#A5A5AD</code></td><td><span class="plate" style="background:#6B6B70"></span><code>#6B6B70</code></td><td>Третьестепенный: подсказка в строке, плейсхолдер, бренд в списке</td></tr>
+<tr><td><code>accent</code></td><td><span class="plate" style="background:#3B6CF6"></span><code>#3B6CF6</code></td><td><span class="plate" style="background:#5C8CFF"></span><code>#5C8CFF</code></td><td>Акцент: ссылки, активный микрофон, выбранный день в меню</td></tr>
+<tr><td><code>kcal</code></td><td><span class="plate" style="background:#5DB523"></span><code>#5DB523</code></td><td><span class="plate" style="background:#92CF2C"></span><code>#92CF2C</code></td><td>Калории: внешнее кольцо, буква К, число записи</td></tr>
+<tr><td><code>protein</code></td><td><span class="plate" style="background:#F2626C"></span><code>#F2626C</code></td><td><span class="plate" style="background:#FF7A82"></span><code>#FF7A82</code></td><td>Белки: второе кольцо, буква Б</td></tr>
+<tr><td><code>fat</code></td><td><span class="plate" style="background:#F2A63B"></span><code>#F2A63B</code></td><td><span class="plate" style="background:#FFB454"></span><code>#FFB454</code></td><td>Жиры: третье кольцо, буква Ж</td></tr>
+<tr><td><code>carbs</code></td><td><span class="plate" style="background:#4E8AF4"></span><code>#4E8AF4</code></td><td><span class="plate" style="background:#6B9FFF"></span><code>#6B9FFF</code></td><td>Углеводы: внутреннее кольцо, буква У</td></tr>
+    </tbody>
+  </table>
+  <div class="rule"><b>Дорожка кольца — его же цвет, приглушённый.</b> Незаполненная часть кольца — это тот же оттенок с прозрачностью 20% в светлой теме и 28% в тёмной (<code>Palette.track</code>). Отдельного «серого» для дорожек нет: пустое кольцо читается как «то же кольцо, ещё не заполненное».</div>
+  <div class="rule"><b>Четыре цвета — четыре величины.</b> Зелёный всегда калории, красный — белки, оранжевый — жиры, синий — углеводы. В кольцах, буквах К/Б/Ж/У, числах записей, плитках и полях шторки — везде одно соответствие.</div>
+  <details class="code"><summary>Код · <code>UI/Palette.swift</code></summary><pre><code>enum Palette {
+    static let bg = dynamic(0xF5F5F7, 0x000000)
+    static let surface = dynamic(0xFFFFFF, 0x1C1C1E)
+    static let surfaceMuted = dynamic(0xEDEDF0, 0x2C2C2E)
+    static let text = dynamic(0x111114, 0xFFFFFF)
+    static let textSecondary = dynamic(0x6E6E76, 0x9A9A9E)
+    static let textTertiary = dynamic(0xA5A5AD, 0x6B6B70)
+    static let accent = dynamic(0x3B6CF6, 0x5C8CFF)
+    static let kcal = dynamic(0x5DB523, 0x92CF2C)
+    static let protein = dynamic(0xF2626C, 0xFF7A82)
+    static let fat = dynamic(0xF2A63B, 0xFFB454)
+    static let carbs = dynamic(0x4E8AF4, 0x6B9FFF)
+
+    /// A ring&#x27;s unfilled track: its own hue, dimmed.
+    static func track(_ ring: Color, dark: Bool) -&gt; Color { ring.opacity(dark ? 0.28 : 0.2) }
+
+    private static func dynamic(_ light: UInt32, _ dark: UInt32) -&gt; Color {
+        Color(UIColor { $0.userInterfaceStyle == .dark ? uiColor(dark) : uiColor(light) })
+    }
+
+    private static func uiColor(_ hex: UInt32) -&gt; UIColor {
+        UIColor(
+            red: CGFloat((hex &gt;&gt; 16) &amp; 0xFF) / 255,
+            green: CGFloat((hex &gt;&gt; 8) &amp; 0xFF) / 255,
+            blue: CGFloat(hex &amp; 0xFF) / 255,
+            alpha: 1
+        )
+    }
+}</code></pre></details>
+</section>
+
+<section id="type">
+  <h2>Шрифт</h2>
+  <p>SF Pro — системный шрифт iPhone, без вшитых файлов. Приложение использует только системные текстовые стили, поэтому весь интерфейс масштабируется с настройкой «Размер текста» на телефоне. Ниже — размеры при стандартном значении; при крупном тексте все они растут пропорционально, и верстка обязана это выдерживать (проверяется UI-тестами с категорией Accessibility L).</p>
+  <div class="type-row"><span class="meta">largeTitle · 34</span><span style="font-size:34px;font-weight:500;letter-spacing:-.02em">556 <span class="muted" style="font-size:20px;font-weight:600">ккал</span></span></div>
+  <div class="type-row"><span class="meta">title · 28 · medium</span><span style="font-size:28px;font-weight:500">74</span></div>
+  <div class="type-row"><span class="meta">title2 · 22 · semibold</span><span style="font-size:22px;font-weight:600">К</span></div>
+  <div class="type-row"><span class="meta">title3 · 20 · semibold</span><span style="font-size:20px;font-weight:600">Сегодня</span></div>
+  <div class="type-row"><span class="meta">title3 · 20</span><span style="font-size:20px">Творог 5% 150 грамм</span></div>
+  <div class="type-row"><span class="meta">body · 17</span><span style="font-size:17px">Рост</span></div>
+  <div class="type-row"><span class="meta">subheadline · 15</span><span style="font-size:15px;color:var(--textSecondary)">Нет сети — ищу только в телефоне</span></div>
+  <div class="type-row"><span class="meta">footnote · 13</span><span style="font-size:13px;color:var(--textSecondary)">цель 2000</span></div>
+  <div class="type-row"><span class="meta">caption · 12</span><span style="font-size:12px;color:var(--textSecondary)">Пн</span></div>
+  <h3>Где какой</h3>
+  <table>
+    <tr><th>Стиль</th><th>Роль</th></tr>
+    <tr><td><code>title3</code> regular</td><td>Голос дневника: строки записей, строка ввода, подсказка, ингредиенты блюда, поля профиля и шторки</td></tr>
+    <tr><td><code>title3</code> semibold</td><td>Заголовок дня в шапке («Сегодня»)</td></tr>
+    <tr><td><code>title2</code> semibold / medium</td><td>Буква К/Б/Ж/У в шапке; числа в центре колец</td></tr>
+    <tr><td><code>body</code></td><td>Строки настроек, списков, меню, пилюля Д/Н/М (semibold)</td></tr>
+    <tr><td><code>subheadline</code></td><td>Все подписи и статусы под строкой, заголовки групп в шторке, бренд в списке совпадений — вторым цветом</td></tr>
+    <tr><td><code>largeTitle</code>, <code>title</code></td><td>Крупные числа: средние калории в статистике, значения в плитках, поля КБЖУ в шторке</td></tr>
+  </table>
+  <div class="rule"><b>Цифры — табличные.</b> Везде, где числа стоят друг под другом или меняются на месте (число справа от записи, центр колец, плитки), включены <code>monospacedDigit()</code>, чтобы колонка не дрожала.</div>
+  <div class="rule"><b>От 20 pt — Display, ниже — Text.</b> Это правило самого SF Pro; системные стили соблюдают его сами. Свои размеры в пунктах в коде не задаются.</div>
+</section>
+
+<section id="space">
+  <h2>Отступы и форма</h2>
+  <p>Шкала небольшая и целиком взята из того, как свёрстаны экраны. Горизонтальное поле дневника — 24, оно же у ингредиентов блюда и шторки; экран статистики и списки — 16; панель колец — 12.</p>
+  <div class="scale">
+    <div><i style="width:2px;height:2px"></i>2</div>
+    <div><i style="width:4px;height:4px"></i>4</div>
+    <div><i style="width:5px;height:5px"></i>5</div>
+    <div><i style="width:6px;height:6px"></i>6</div>
+    <div><i style="width:8px;height:8px"></i>8</div>
+    <div><i style="width:10px;height:10px"></i>10</div>
+    <div><i style="width:12px;height:12px"></i>12</div>
+    <div><i style="width:14px;height:14px"></i>14</div>
+    <div><i style="width:16px;height:16px"></i>16</div>
+    <div><i style="width:20px;height:20px"></i>20</div>
+    <div><i style="width:24px;height:24px"></i>24</div>
+    <div><i style="width:28px;height:28px"></i>28</div>
+  </div>
+  <table style="margin-top:20px">
+    <tr><th>Значение</th><th>Где</th></tr>
+    <tr><td>24 / 5</td><td>Строка дневника: поле слева-справа 24, сверху-снизу 5. Список начинается через 8 от шапки</td></tr>
+    <tr><td>16</td><td>Между названием записи и числом справа; между строкой и кнопкой «очистить» — 12</td></tr>
+    <tr><td>12</td><td>Подпись-статус под строкой ввода отступает на 12; плашка «Удалено» — 16 от краёв экрана, 8 от низа</td></tr>
+    <tr><td>14</td><td>Между пилюлей и кольцами; внутри плитки по вертикали (по горизонтали 16)</td></tr>
+    <tr><td>10 / 6</td><td>Сетка плиток — 10; мини-кольца в календаре — 6; месяцы — 14</td></tr>
+    <tr><td>52</td><td>Высота шапки дневника; кнопки в ней занимают всю высоту</td></tr>
+    <tr><td>212</td><td>Высота стадиона на главном экране</td></tr>
+  </table>
+  <h3>Скругления и толщины</h3>
+  <table>
+    <tr><th>Форма</th><th>Значение</th></tr>
+    <tr><td>Плитка статистики</td><td>радиус 20, непрерывное (continuous) скругление</td></tr>
+    <tr><td>Пилюля, плашка, кнопки шторки</td><td>капсула (радиус = половина высоты)</td></tr>
+    <tr><td>Стадион на главном</td><td>четыре кольца, толщина 13, зазор 3</td></tr>
+    <tr><td>Кольца статистики</td><td>толщина 24, зазор 5</td></tr>
+    <tr><td>Мини-кольца недели / календаря / месяцев</td><td>3.5 / 1.5 · 3 / 1.5 · 5 / 2.5</td></tr>
+    <tr><td>Пилюля Д/Н/М</td><td>сегмент 46 × 32, внутренний отступ 2</td></tr>
+  </table>
+</section>
+
+<section id="motion">
+  <h2>Движение</h2>
+  <p>Анимаций мало, и каждая отвечает за одно: показать, что изменилось. Кольца едут от прошлого значения, а не от нуля; список совпадений выезжает, а не вспыхивает; страница дня при возврате к «Сегодня» доезжает за треть секунды. Нажмите на карточку, чтобы проиграть.</p>
+  <div class="motion">
+    <div class="demo"><div class="what">Кольца стадиона</div><div class="how">easeOut · 0.65 s · от прошлого значения</div><div class="stage"><div class="ball ease65"></div></div></div>
+    <div class="demo"><div class="what">Кольца статистики</div><div class="how">easeOut · 0.7 s</div><div class="stage"><div class="ball ease65"></div></div></div>
+    <div class="demo"><div class="what">Пилюля Д/Н/М</div><div class="how">snappy · 0.22 s · matchedGeometry</div><div class="stage"><div class="ball ease22"></div></div></div>
+    <div class="demo"><div class="what">Список совпадений, запись, удаление</div><div class="how">snappy · 0.25 s · opacity + move(.top)</div><div class="stage"><div class="ball snappy"></div></div></div>
+    <div class="demo"><div class="what">Возврат к «Сегодня», переход к дню из меню</div><div class="how">easeOut · 0.35 s</div><div class="stage"><div class="ball ease35"></div></div></div>
+    <div class="demo"><div class="what">Панель колец при фокусе на строке</div><div class="how">easeOut · 0.2 s · opacity</div><div class="stage"><div class="ball ease22"></div></div></div>
+  </div>
+  <h3>Отклик</h3>
+  <table>
+    <tr><th>Событие</th><th>Хаптика</th></tr>
+    <tr><td>Запись сохранена</td><td><code>impact(.light)</code></td></tr>
+    <tr><td>Enter без подсказки (ничего не записано)</td><td><code>selection</code></td></tr>
+    <tr><td>Переключение Д/Н/М, К/Б/Ж/У, периода статистики</td><td><code>selection</code></td></tr>
+    <tr><td>Штрихкод распознан</td><td><code>notification(.success)</code></td></tr>
+  </table>
+  <div class="rule"><b>Числа меняются на месте.</b> Там, где число обновляется (центр колец, число записи при смене К/Б/Ж/У, заголовок статистики), стоит <code>contentTransition(.numericText())</code>: цифры перелистываются, а не подменяются.</div>
+</section>
+
+<section id="components">
+  <h2>Компоненты</h2>
+  <p>Слева — как это выглядит, справа — что важно. Примеры нарисованы здесь заново на тех же токенах, а под каждым раскрывается настоящий Swift-код из приложения.</p>
+
+  <h3>Строка записи</h3>
+  <div class="component">
+    <div class="sample phone">
+      <div class="k-line"><span class="name">Сырники 2 порции</span><span class="num">516</span></div>
+      <div class="k-line"><span class="name">Творог 5% 150 грамм</span><span class="num">182</span></div>
+      <div class="k-line"><span class="name">Рис с куриной бризолью 1 порция</span><span class="num">394</span></div>
+      <div class="k-line"><span class="name">Куриная грудка отварная 150 грамм</span><span class="num" style="color:var(--protein)">46</span></div>
+    </div>
+    <div class="notes">
+      <p>Одна строка — одна запись: название и количество словами, число справа. Число — калории, или белки/жиры/углеводы, если переключить букву в шапке; цвет числа следует за величиной.</p>
+      <p>Тап по строке — правка на месте: поле ввода встаёт на её место с её же текстом. Долгое нажатие — системное меню «Изменить / Удалить». Ни бренда, ни времени, ни иконок в строке нет.</p>
+      <details class="code"><summary>Код · <code>UI/DiaryView.swift</code></summary><pre><code>    private func entryLine(_ e: DiaryEntry, current: Bool) -&gt; some View {
+        HStack(alignment: .firstTextBaseline, spacing: 16) {
+            Text(e.line(lang: store.lang))
+                .foregroundStyle(Palette.text)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text(metric.value(e))
+                .monospacedDigit()
+                .foregroundStyle(metric.color)
+                .contentTransition(.numericText())
+                .accessibilityLabel(&quot;\(metric.fullName) \(metric.value(e))&quot;)
+        }
+        .font(.title3)
+        .padding(.horizontal, 24)
+        .padding(.vertical, 5)
+        .contentShape(Rectangle())
+        .accessibilityElement(children: .combine)
+        .accessibilityHint(current ? L(&quot;Изменить&quot;) : &quot;&quot;)
+        .onTapGesture { if current { edit(e) } }
+        .contextMenu {
+            Button(&quot;Изменить&quot;, systemImage: &quot;pencil&quot;) { edit(e) }
+            Button(&quot;Удалить&quot;, systemImage: &quot;trash&quot;, role: .destructive) { delete(e) }
+        }
+    }</code></pre></details>
+    </div>
+  </div>
+
+  <h3>Строка ввода с подсказкой</h3>
+  <div class="component">
+    <div class="sample phone">
+      <div class="k-line ghost"><span class="name"><span class="typed">твор</span><span class="caret"></span><span class="rest">ог 5% 1 пачка</span></span><span class="k-tools">⊗</span></div>
+      <div class="k-status">&nbsp;</div>
+      <div class="k-line ghost"><span class="name"><span class="typed">ndjhju 150</span><span class="caret"></span><span class="rest"> → Творог 150 грамм</span></span><span class="k-tools">⊗</span></div>
+      <div class="k-status">&nbsp;</div>
+      <div class="k-line ghost"><span class="name"><span class="typed">сырок глазированный</span><span class="caret"></span></span><span class="k-tools">⊗</span></div>
+      <div class="k-status">Ищу…</div>
+      <div class="k-status" style="padding-top:18px">Нет сети — ищу только в телефоне<a href="#">Не нашли? Добавить новый продукт</a></div>
+      <div class="k-line" style="margin-top:18px"><span class="name placeholder">Введите продукт…</span><span class="k-tools">📷 🎤</span></div>
+    </div>
+    <div class="notes">
+      <p>Системное поле ввода, а за ним — серый текст подсказки ровно от того места, где кончается набранное. Подсказка одна и всегда целая: продукт <i>и</i> количество. Enter принимает её целиком.</p>
+      <p>Если догадка не продолжает набранное (опечатка, другой падеж, не та раскладка), она показывается целиком после стрелки: Enter никогда не запишет то, чего не видно.</p>
+      <p>Под строкой — только то, чего подсказка сказать не может: «Ищу…», «Ничего не найдено», «Нет сети», и всегда — ссылка на свой продукт. Камера и микрофон стоят в пустой строке и исчезают, когда есть текст; при правке записи их нет.</p>
+      <details class="code"><summary>Код · <code>UI/GhostField.swift</code></summary><pre><code>import SwiftUI
+
+/// The input line with one inline &quot;ghost&quot; completion, the way a browser&#x27;s
+/// address bar guesses the rest: `suggestion` is the whole line the app
+/// expects (&quot;Творог 5% 150 грамм&quot;), and whatever of it lies past the typed
+/// text is drawn grayed-out behind the real, system text field. Enter
+/// (the Go key) is how the guess is taken.
+struct GhostField: View {
+    @Binding var text: String
+    var suggestion: String?
+    var focus: FocusState&lt;Bool&gt;.Binding
+    /// Called with the line as submitted (the field&#x27;s text may not have
+    /// caught up within the same update).
+    var onSubmit: (String) -&gt; Void
+    /// A tap on the grey text — &quot;not this one?&quot; — opens the other matches.
+    var onGhostTap: (() -&gt; Void)? = nil
+
+    /// Where the typed text ends on its first line, in the field&#x27;s
+    /// coordinates: a tap to the right of it (or below the first line) is on
+    /// the ghost, a tap on the typed text itself just moves the caret.
+    @State private var typedWidth: CGFloat = 0
+    @State private var lineHeight: CGFloat = 0
+
+    /// What&#x27;s drawn after the typed text: the rest of a continuation, or —
+    /// for a guess that doesn&#x27;t continue it (a typo, another case form, the
+    /// other keyboard layout) — the whole line after an arrow, so Enter never
+    /// logs a line the user didn&#x27;t see.
+    private var ghost: String? {
+        guard let s = suggestion, !text.isEmpty else { return nil }
+        if s.lowercased().hasPrefix(text.lowercased()) {
+            return s.count &gt; text.count ? String(s.dropFirst(text.count)) : nil
+        }
+        return &quot;\(text.hasSuffix(&quot; &quot;) ? &quot;&quot; : &quot; &quot;)→ \(s)&quot;
+    }
+
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            if let ghost {
+                Text(ghostText(ghost))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
+                    .background {
+                        // The typed text alone, unwrapped, to measure where it
+                        // ends; never drawn.
+                        Text(text)
+                            .fixedSize()
+                            .hidden()
+                            .background(GeometryReader { g in
+                                Color.clear.preference(key: TypedSizeKey.self, value: g.size)
+                            })
+                    }
+                    .onPreferenceChange(TypedSizeKey.self) { size in
+                        typedWidth = size.width
+                        lineHeight = size.height
+                    }
+            }
+            // Vertical axis: a long line wraps like the logged lines do. Its
+            // Return key would insert a newline, so a newline means &quot;submit&quot;.
+            TextField(&quot;Введите продукт…&quot;, text: $text, axis: .vertical)
+                .focused(focus)
+                .accessibilityIdentifier(&quot;line&quot;)
+                .submitLabel(.go)
+                .autocorrectionDisabled()
+                .foregroundStyle(Palette.text)
+                .onChange(of: text) { _, new in
+                    guard new.contains(&quot;\n&quot;) else { return }
+                    let line = new.replacingOccurrences(of: &quot;\n&quot;, with: &quot;&quot;)
+                    text = line
+                    if line.trimmingCharacters(in: .whitespaces).isEmpty {
+                        focus.wrappedValue = false
+                    } else {
+                        onSubmit(line)
+                    }
+                }
+                .accessibilityHint(suggestion.map { L(&quot;Подсказка: \($0)&quot;) } ?? &quot;&quot;)
+            // Over the field, a tap target where the grey text is: to the
+            // right of the typed text on its line, and anything below it.
+            // The typed text itself stays the field&#x27;s (caret, selection).
+            if ghost != nil, let onGhostTap {
+                GeometryReader { g in
+                    // Typed text that wraps has no measurable end: no target.
+                    if typedWidth &lt; g.size.width {
+                        Color.clear
+                            .contentShape(Rectangle())
+                            .frame(width: g.size.width - typedWidth, height: lineHeight)
+                            .offset(x: typedWidth)
+                            .onTapGesture(perform: onGhostTap)
+                            .accessibilityElement()
+                            .accessibilityLabel(L(&quot;Другие варианты&quot;))
+                            .accessibilityIdentifier(&quot;ghost&quot;)
+                        if g.size.height &gt; lineHeight {
+                            Color.clear
+                                .contentShape(Rectangle())
+                                .frame(width: g.size.width, height: g.size.height - lineHeight)
+                                .offset(y: lineHeight)
+                                .onTapGesture(perform: onGhostTap)
+                        }
+                    }
+                }
+            }
+        }
+        .font(.title3)
+    }
+
+    private struct TypedSizeKey: PreferenceKey {
+        static let defaultValue = CGSize.zero
+        static func reduce(value: inout CGSize, nextValue: () -&gt; CGSize) { value = nextValue() }
+    }
+
+    private func ghostText(_ ghost: String) -&gt; AttributedString {
+        var typed = AttributedString(text)
+        typed.foregroundColor = .clear
+        var rest = AttributedString(ghost)
+        rest.foregroundColor = Palette.textTertiary
+        return typed + rest
+    }
+}</code></pre></details>
+    </div>
+  </div>
+
+  <h3>Список совпадений</h3>
+  <div class="component">
+    <div class="sample phone">
+      <div class="k-line ghost"><span class="name"><span class="typed">тво</span><span class="rest">рог 1 порция</span></span><span class="k-tools">⊗</span></div>
+      <div class="k-match"><span>Творог 5%</span><span class="num">121</span></div>
+      <div class="k-match"><span>Творог 9%</span><span class="num">159</span></div>
+      <div class="k-match"><span>Творог обезжиренный</span><span class="num">90</span></div>
+      <div class="k-match"><span>творог</span><span class="brand">Беллакт</span><span class="num">113</span></div>
+      <div class="k-status"><a href="#">Не нашли? Добавить новый продукт</a></div>
+    </div>
+    <div class="notes">
+      <p>Скрытая функция: раскрывается тапом по серому тексту подсказки или коротким свайпом вниз по строке. Сначала то, что уже записывали, затем точные совпадения, затем с опечаткой; одна строка на название. Тап по строке ставит название в поле — дальше как обычно.</p>
+      <details class="code"><summary>Код · <code>UI/DiaryView.swift</code></summary><pre><code>    private var matchList: some View {
+        let items = matches
+        return VStack(alignment: .leading, spacing: 0) {
+            ForEach(items) { f in
+                Button {
+                    closeList()
+                    pick(f)
+                } label: {
+                    HStack(alignment: .firstTextBaseline, spacing: 8) {
+                        Text(f.name(for: store.lang.rawValue))
+                            .foregroundStyle(Palette.text)
+                        if let brand = f.brand {
+                            Text(brand)
+                                .foregroundStyle(Palette.textTertiary)
+                                .lineLimit(1)
+                        }
+                        Spacer(minLength: 12)
+                        Text(formatKcal(f.per100g.kcal))
+                            .monospacedDigit()
+                            .foregroundStyle(Palette.textSecondary)
+                    }
+                    .font(.body)
+                    .padding(.vertical, 8)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+            }
+            if items.isEmpty {
+                Text(&quot;Других вариантов нет&quot;)
+                    .font(.subheadline)
+                    .foregroundStyle(Palette.textSecondary)
+                    .padding(.vertical, 8)
+            }
+        }
+        .padding(.top, 6)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier(&quot;matchList&quot;)
+        .transition(.opacity.combined(with: .move(edge: .top)))
+    }</code></pre></details>
+    </div>
+  </div>
+
+  <h3>Стадион и сводка дня</h3>
+  <div class="component">
+    <div class="sample phone" style="padding:8px 12px">
+      <div style="text-align:center;margin-bottom:14px"><div class="k-pill" data-rings="#stadium-demo"><span class="on" data-progress="[0.28,0.74,0.36,0.03]">Д</span><span data-progress="[0.82,0.95,0.6,0.7]">Н</span><span data-progress="[1.12,1.3,0.9,0.85]">М</span></div></div>
+      <div style="position:relative">
+        <svg id="stadium-demo" class="k-stadium" data-progress="[0.28,0.74,0.36,0.03]"></svg>
+        <div class="k-rings-label" style="position:absolute;inset:0;display:grid;place-items:center"><div><div><i class="kcal">Ккал</i> 556</div><div><i class="p">Б</i> 74 &nbsp;&nbsp;<i class="f">Ж</i> 25 &nbsp;&nbsp;<i class="c">У</i> 7.5</div></div></div>
+      </div>
+    </div>
+    <div class="notes">
+      <p>Четыре вложенных кольца в форме капсулы, снаружи внутрь: калории, белки, жиры, углеводы. Заполняются по часовой от верхней середины. Переключите пилюлю — кольца доедут от прошлых значений; М показывает перебор: кольцо идёт на второй круг с тенью на кончике, чтобы было видно, насколько сверх цели.</p>
+      <p>Н и М — среднее по дням с записями за календарную неделю и месяц, и только до сегодняшнего дня: пропущенный день не тянет среднее к нулю, а план на завтра ещё не считается. Панель прячется, пока открыта клавиатура.</p>
+      <details class="code"><summary>Код · <code>UI/StadiumRings.swift</code></summary><pre><code>import SwiftUI
+
+struct StadiumRing {
+    /// eaten / target, not clamped: past 1 the ring goes round a second lap
+    /// over itself, Apple-Fitness style, so an overshoot reads as &quot;how much over&quot;.
+    var progress: Double
+    var color: Color
+}
+
+/// Nested progress tracks in a capsule shape, outer to inner — the diary&#x27;s
+/// pinned summary. Each ring fills clockwise from the top center; `content`
+/// sits in the empty middle. Progress changes animate from the previous
+/// values, so flipping Д/Н/М or adding an entry reads as the rings moving.
+struct StadiumRings&lt;Content: View&gt;: View {
+    var rings: [StadiumRing]
+    var strokeWidth: CGFloat = 13
+    var gap: CGFloat = 3
+    @ViewBuilder var content: Content
+    @Environment(\.colorScheme) private var scheme
+
+    var body: some View {
+        ZStack {
+            ForEach(rings.indices, id: \.self) { i in
+                let ring = rings[i]
+                let inset = strokeWidth / 2 + CGFloat(i) * (strokeWidth + gap)
+                let p = max(0, ring.progress)
+                let style = StrokeStyle(lineWidth: strokeWidth, lineCap: .round)
+                ZStack {
+                    StadiumShape(inset: inset).stroke(Palette.track(ring.color, dark: scheme == .dark), style: style)
+                    StadiumShape(inset: inset).trim(from: 0, to: min(p, 1)).stroke(ring.color, style: style)
+                    // Second lap: drawn over the full ring with a soft shadow
+                    // ahead of its tip, so its end stays visible.
+                    StadiumShape(inset: inset)
+                        .trim(from: 0, to: min(max(p - 1, 0), 0.999))
+                        .stroke(ring.color, style: style)
+                        .shadow(color: .black.opacity(p &gt; 1 ? 0.45 : 0), radius: strokeWidth * 0.3)
+                }
+                .animation(.easeOut(duration: 0.65), value: p)
+            }
+            content
+                .padding(CGFloat(rings.count) * (strokeWidth + gap) + 4)
+        }
+    }
+}
+
+/// A capsule path that starts at the top center and runs clockwise — the
+/// same origin and direction as a clock-face ring.
+struct StadiumShape: Shape {
+    var inset: CGFloat
+
+    func path(in bounds: CGRect) -&gt; Path {
+        let r = bounds.insetBy(dx: inset, dy: inset)
+        guard r.width &gt; 0, r.height &gt; 0 else { return Path() }
+        let radius = min(r.width, r.height) / 2
+        var p = Path()
+        p.move(to: CGPoint(x: r.midX, y: r.minY))
+        p.addLine(to: CGPoint(x: r.maxX - radius, y: r.minY))
+        p.addArc(center: CGPoint(x: r.maxX - radius, y: r.midY), radius: radius, startAngle: .degrees(-90), endAngle: .degrees(90), clockwise: false)
+        p.addLine(to: CGPoint(x: r.minX + radius, y: r.maxY))
+        p.addArc(center: CGPoint(x: r.minX + radius, y: r.midY), radius: radius, startAngle: .degrees(90), endAngle: .degrees(270), clockwise: false)
+        p.addLine(to: CGPoint(x: r.midX, y: r.minY))
+        return p
+    }
+}</code></pre></details>
+      <details class="code"><summary>Код · <code>UI/SummaryPanel.swift</code></summary><pre><code>struct SummaryPanel: View {
+    @Environment(DiaryStore.self) private var store
+    let dayKey: String
+    @Binding var period: SummaryPeriod
+
+    var body: some View {
+        let targets = store.profile.targets
+        let total = switch period {
+        case .day: store.summary(dayKey...dayKey, average: false)
+        case .week: store.summary(DayKeys.weekRange(dayKey), average: true)
+        case .month: store.summary(DayKeys.monthRange(dayKey), average: true)
+        }
+        VStack(spacing: 14) {
+            PeriodToggle(period: $period)
+            StadiumRings(rings: [
+                StadiumRing(progress: ratio(total.kcal, targets.kcal), color: Palette.kcal),
+                StadiumRing(progress: ratio(total.protein, targets.protein), color: Palette.protein),
+                StadiumRing(progress: ratio(total.fat, targets.fat), color: Palette.fat),
+                StadiumRing(progress: ratio(total.carbs, targets.carbs), color: Palette.carbs),
+            ]) {
+                VStack(spacing: 2) {
+                    Text(&quot;\(Text(&quot;Ккал&quot;).foregroundStyle(Palette.kcal)) \(formatKcal(total.kcal))&quot;)
+                    Text(&quot;\(Text(&quot;Б&quot;).foregroundStyle(Palette.protein)) \(formatGrams(total.protein))   \(Text(&quot;Ж&quot;).foregroundStyle(Palette.fat)) \(formatGrams(total.fat))   \(Text(&quot;У&quot;).foregroundStyle(Palette.carbs)) \(formatGrams(total.carbs))&quot;)
+                }
+                .font(.title2.weight(.medium))
+                .monospacedDigit()
+                .foregroundStyle(Palette.text)
+                .contentTransition(.numericText())
+                .animation(.snappy, value: total)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+            }
+            .frame(height: 212)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(&quot;\(L(&quot;Калории&quot;)) \(formatKcal(total.kcal)), \(L(&quot;Белки&quot;)) \(formatGrams(total.protein)), \(L(&quot;Жиры&quot;)) \(formatGrams(total.fat)), \(L(&quot;Углеводы&quot;)) \(formatGrams(total.carbs))&quot;)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+    }
+}</code></pre></details>
+    </div>
+  </div>
+
+  <h3>Пилюля</h3>
+  <div class="component">
+    <div class="sample phone" style="text-align:center">
+      <div class="k-pill"><span class="on">Д</span><span>Н</span><span>М</span></div>
+    </div>
+    <div class="notes">
+      <p>Сегментный переключатель в духе iOS: светлый бегунок под выбранной буквой, остальные — вторым цветом. Бегунок едет (matchedGeometry), подпись меняет цвет за 0.22 с. Та же пилюля — К/Б/Ж/У не нужна: там одна буква, которая переключается тапом.</p>
+      <details class="code"><summary>Код · <code>UI/SummaryPanel.swift</code></summary><pre><code>/// iOS-style segmented pill: a thumb that slides under the chosen letter.
+struct PeriodToggle: View {
+    @Binding var period: SummaryPeriod
+    @Namespace private var thumb
+
+    var body: some View {
+        HStack(spacing: 0) {
+            ForEach(SummaryPeriod.allCases) { p in
+                Text(p.letter)
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(p == period ? Palette.bg : Palette.textSecondary)
+                    .frame(width: 46, height: 32)
+                    .background {
+                        if p == period {
+                            Capsule().fill(Palette.text).matchedGeometryEffect(id: &quot;thumb&quot;, in: thumb)
+                        }
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture { withAnimation(.snappy(duration: 0.22)) { period = p } }
+                    .accessibilityAddTraits(p == period ? [.isButton, .isSelected] : .isButton)
+            }
+        }
+        .padding(2)
+        .background(Capsule().fill(Palette.surfaceMuted))
+        .sensoryFeedback(.selection, trigger: period)
+    }
+}</code></pre></details>
+    </div>
+  </div>
+
+  <h3>Круглые кольца и плитки</h3>
+  <div class="component">
+    <div class="sample phone" style="padding:20px 16px">
+      <div style="padding:0 24px 20px"><svg class="k-rings" data-progress="[0.28,0.74,0.36,0.03]" data-stroke="24" data-gap="5"></svg></div>
+      <div class="k-tiles">
+        <div class="k-tile"><div class="label">Калории</div><div><span class="value" style="color:var(--kcal)">556</span><span class="unit">ккал</span></div><div class="goal">цель 2000</div></div>
+        <div class="k-tile"><div class="label">Белки</div><div><span class="value" style="color:var(--protein)">74</span><span class="unit">г</span></div><div class="goal">цель 100</div></div>
+        <div class="k-tile"><div class="label">Жиры</div><div><span class="value" style="color:var(--fat)">25</span><span class="unit">г</span></div><div class="goal">цель 70</div></div>
+        <div class="k-tile"><div class="label">Углеводы</div><div><span class="value" style="color:var(--carbs)">7.5</span><span class="unit">г</span></div><div class="goal">цель 250</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:24px 0 0">
+        <div style="text-align:center;font-size:12px;color:var(--textSecondary)">ср<svg class="k-rings" data-progress="[0.6,0.8,0.4,0.5]" data-stroke="16" data-gap="7" style="margin:6px 0"></svg>7</div>
+        <div style="text-align:center;font-size:12px;color:var(--textSecondary)">чт<svg class="k-rings" data-progress="[0.9,0.5,0.7,0.6]" data-stroke="16" data-gap="7" style="margin:6px 0"></svg>8</div>
+        <div style="text-align:center;font-size:12px;color:var(--textSecondary)">пт<svg class="k-rings" data-progress="[0,0,0,0]" data-stroke="16" data-gap="7" style="margin:6px 0"></svg>9</div>
+        <div style="text-align:center;font-size:12px;color:var(--textSecondary)">сб<svg class="k-rings" data-progress="[1,1,0.8,0.9]" data-stroke="16" data-gap="7" style="margin:6px 0"></svg>10</div>
+        <div style="text-align:center;font-size:12px;color:var(--textSecondary)">вс<svg class="k-rings" data-progress="[0.4,0.3,0.2,0.2]" data-stroke="16" data-gap="7" style="margin:6px 0"></svg>11</div>
+        <div style="text-align:center;font-size:12px;color:var(--textSecondary)">пн<svg class="k-rings" data-progress="[0.7,0.9,0.5,0.6]" data-stroke="16" data-gap="7" style="margin:6px 0"></svg>12</div>
+        <div style="text-align:center;font-size:12px;color:var(--text);font-weight:600">вт<svg class="k-rings" data-progress="[0.28,0.74,0.36,0.03]" data-stroke="16" data-gap="7" style="margin:6px 0"></svg>13</div>
+      </div>
+    </div>
+    <div class="notes">
+      <p>Статистика в духе Fitness: кольца в круге на весь экран — средний день за период; под ними четыре плитки со значением, единицей и целью; ниже — дни недели, календарь месяца или месяцы мини-кольцами. Круглое кольцо, в отличие от стадиона, не идёт на второй круг: перебор здесь говорят цифры.</p>
+      <details class="code"><summary>Код · <code>UI/ActivityRings.swift</code></summary><pre><code>import SwiftUI
+
+/// Nested circular progress rings, outer to inner, Apple-Fitness style —
+/// the statistics screen&#x27;s picture of a period. Each fills clockwise from
+/// the top; a ring past its target stays full (the diary&#x27;s stadium rings
+/// show the overshoot, here the numbers do).
+struct ActivityRings&lt;Content: View&gt;: View {
+    var rings: [StadiumRing]
+    var strokeWidth: CGFloat = 8
+    var gap: CGFloat = 3
+    @ViewBuilder var content: Content
+    @Environment(\.colorScheme) private var scheme
+
+    init(rings: [StadiumRing], strokeWidth: CGFloat = 8, gap: CGFloat = 3, @ViewBuilder content: () -&gt; Content = { EmptyView() }) {
+        self.rings = rings
+        self.strokeWidth = strokeWidth
+        self.gap = gap
+        self.content = content()
+    }
+
+    var body: some View {
+        ZStack {
+            ForEach(rings.indices, id: \.self) { i in
+                let ring = rings[i]
+                let inset = strokeWidth / 2 + CGFloat(i) * (strokeWidth + gap)
+                let p = min(max(ring.progress, 0), 1)
+                Circle()
+                    .inset(by: inset)
+                    .stroke(Palette.track(ring.color, dark: scheme == .dark), lineWidth: strokeWidth)
+                Circle()
+                    .inset(by: inset)
+                    .trim(from: 0, to: p)
+                    .stroke(ring.color, style: StrokeStyle(lineWidth: strokeWidth, lineCap: .round))
+                    .rotationEffect(.degrees(-90))
+                    .animation(.easeOut(duration: 0.7), value: p)
+            }
+            content
+        }
+        .aspectRatio(1, contentMode: .fit)
+    }
+}
+
+/// The four rings for a total against the day&#x27;s targets.
+func ringsFor(_ n: Nutrition, targets: Nutrition) -&gt; [StadiumRing] {
+    func ratio(_ v: Double, _ t: Double) -&gt; Double { t &gt; 0 ? v / t : 0 }
+    return [
+        StadiumRing(progress: ratio(n.kcal, targets.kcal), color: Palette.kcal),
+        StadiumRing(progress: ratio(n.protein, targets.protein), color: Palette.protein),
+        StadiumRing(progress: ratio(n.fat, targets.fat), color: Palette.fat),
+        StadiumRing(progress: ratio(n.carbs, targets.carbs), color: Palette.carbs),
+    ]
+}</code></pre></details>
+      <details class="code"><summary>Код · <code>UI/StatsView.swift</code></summary><pre><code>    private func tile(_ label: String, _ value: String, _ unit: String, goal: String, color: Color) -&gt; some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(label).font(.subheadline).foregroundStyle(Palette.textSecondary)
+            HStack(alignment: .firstTextBaseline, spacing: 4) {
+                Text(value).font(.title.weight(.medium)).monospacedDigit().foregroundStyle(color)
+                Text(unit).font(.subheadline).foregroundStyle(Palette.textSecondary)
+            }
+            Text(&quot;цель \(goal)&quot;).font(.footnote).foregroundStyle(Palette.textSecondary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .background(Palette.surface, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+    }</code></pre></details>
+    </div>
+  </div>
+
+  <h3>Плашка «Удалено»</h3>
+  <div class="component">
+    <div class="sample phone"><div class="k-undo">Удалено <b>Вернуть</b></div></div>
+    <div class="notes">
+      <p>Внизу экрана на четыре секунды после удаления. Удаления подряд копятся под одной плашкой, «Вернуть» возвращает всё: ничего, удалённое при живой плашке, не теряется. Одна и та же плашка в дневнике и в «Моих продуктах».</p>
+      <details class="code"><summary>Код · <code>UI/UndoBar.swift</code></summary><pre><code>import SwiftUI
+
+/// What was just deleted, kept for a few seconds so &quot;Вернуть&quot; can put it
+/// back. Several deletes in a row stack up; one tap restores them all —
+/// nothing deleted while the bar is up is ever lost.
+@MainActor
+@Observable
+final class PendingUndo&lt;Item&gt; {
+    private(set) var items: [Item] = []
+    private var expiry: Task&lt;Void, Never&gt;?
+
+    static var window: Duration { .seconds(4) }
+
+    func add(_ item: Item) {
+        withAnimation { items.append(item) }
+        expiry?.cancel()
+        expiry = Task { [weak self] in
+            try? await Task.sleep(for: Self.window)
+            guard !Task.isCancelled else { return }
+            withAnimation { self?.items = [] }
+        }
+    }
+
+    /// Everything pending, most recent last; the bar goes down.
+    func take() -&gt; [Item] {
+        expiry?.cancel()
+        let all = items
+        withAnimation { items = [] }
+        return all
+    }
+}
+
+/// &quot;Удалено — Вернуть&quot; at the bottom of a screen while something can still
+/// be brought back.
+struct UndoBar: View {
+    var shown: Bool
+    var restore: () -&gt; Void
+
+    var body: some View {
+        if shown {
+            HStack {
+                Text(&quot;Удалено&quot;).foregroundStyle(Palette.text)
+                Spacer()
+                Button(&quot;Вернуть&quot;, action: restore)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Palette.accent)
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 14)
+            .background(.regularMaterial, in: Capsule())
+            .padding(.horizontal, 16)
+            .padding(.bottom, 8)
+            .transition(.move(edge: .bottom).combined(with: .opacity))
+        }
+    }
+}</code></pre></details>
+    </div>
+  </div>
+
+  <h3>Строки настроек и списков</h3>
+  <div class="component">
+    <div class="sample phone" style="background:var(--surfaceMuted)">
+      <div class="k-group">
+        <div class="k-row"><span class="lbl">Рост</span><span class="val">168</span><span class="unit">см</span></div>
+        <div class="k-row"><span class="lbl">Вес</span><span class="val">61.5</span><span class="unit">кг</span></div>
+        <div class="k-row"><span class="lbl">Пол</span><span class="val" style="color:var(--accent)">Женский ◇</span></div>
+      </div>
+      <div class="k-group" style="margin-top:20px">
+        <div class="k-row kcal"><span class="lbl">Калории</span><span class="val">1800</span><span class="unit">ккал</span></div>
+        <div class="k-row protein"><span class="lbl">Белки</span><span class="val">120</span><span class="unit">г</span></div>
+        <div class="k-row fat"><span class="lbl">Жиры</span><span class="val">70</span><span class="unit">г</span></div>
+        <div class="k-row carbs"><span class="lbl">Углеводы</span><span class="val">250</span><span class="unit">г</span></div>
+      </div>
+      <div class="k-group" style="margin-top:20px">
+        <div class="k-row"><span>Сырники</span><span class="tag">блюдо</span><span class="val" style="color:var(--textSecondary)">172 ккал</span></div>
+        <div class="k-row"><span>Запеканка мамина</span><span class="val" style="color:var(--textSecondary)">180 ккал</span></div>
+      </div>
+    </div>
+    <div class="notes">
+      <p>Профиль — системная форма: группы, строка с числом справа и единицей, строка с выбором, строка-действие, подпись под группой. Число сохраняется, когда уходишь из поля или с экрана. Цели окрашены в цвет своей величины.</p>
+      <p>«Мои продукты» — системный список: название, пометка «блюдо» третьим цветом, калории на 100 г справа. Свайп влево — удалить, долгое нажатие — меню.</p>
+      <details class="code"><summary>Код · <code>UI/ProfileView.swift</code></summary><pre><code>/// A form row with a number at the right, saved when editing ends — or
+/// when the screen goes away mid-edit. Text that isn&#x27;t a number leaves the
+/// stored value alone, and the row shows it again.
+private struct NumberRow: View {
+    let label: String
+    let stored: String
+    let unit: String
+    let decimal: Bool
+    let color: Color
+    let save: (String) -&gt; Void
+    @State private var text = &quot;&quot;
+    @FocusState private var focused: Bool
+
+    var body: some View {
+        HStack {
+            Text(label).foregroundStyle(color)
+            Spacer()
+            TextField(&quot;—&quot;, text: $text)
+                .keyboardType(decimal ? .decimalPad : .numberPad)
+                .multilineTextAlignment(.trailing)
+                .frame(width: 90)
+                .focused($focused)
+                .onAppear { text = stored }
+                .onChange(of: stored) { if !focused { text = stored } }
+                .onChange(of: focused) { if !focused { commit() } }
+                .onDisappear { if focused { commit() } }
+            Text(unit).foregroundStyle(Palette.textSecondary)
+        }
+    }
+
+    private func commit() {
+        save(text)
+        // Whatever was stored after the save (the new number, or the old
+        // one when the text wasn&#x27;t a number) is what the row shows.
+        DispatchQueue.main.async { text = stored }
+    }
+}
+
+/// The system share sheet.
+private struct ActivityView: UIViewControllerRepresentable {
+    let items: [Any]
+    func makeUIViewController(context: Context) -&gt; UIActivityViewController {
+        UIActivityViewController(activityItems: items, applicationActivities: nil)
+    }
+    func updateUIViewController(_ vc: UIActivityViewController, context: Context) {}
+}</code></pre></details>
+    </div>
+  </div>
+
+  <h3>Шторка «Свой продукт»</h3>
+  <div class="component">
+    <div class="sample phone">
+      <div style="padding:0 20px 24px;font-size:20px">сырники</div>
+      <div style="padding:0 20px 6px;font-size:15px;color:var(--textSecondary)">на 100 г</div>
+      <div class="k-fields">
+        <div class="k-field"><div class="n">246</div><div class="l" style="color:var(--kcal)">Ккал</div></div>
+        <div class="k-field"><div class="n">12.4</div><div class="l" style="color:var(--protein)">Б</div></div>
+        <div class="k-field"><div class="n empty">0</div><div class="l" style="color:var(--fat)">Ж</div></div>
+        <div class="k-field"><div class="n empty">0</div><div class="l" style="color:var(--carbs)">У</div></div>
+      </div>
+      <div class="k-row" style="margin-top:20px;border:0"><span class="lbl" style="font-size:15px;color:var(--textSecondary)">Вес порции, г</span><span class="val" style="color:var(--textTertiary)">—</span></div>
+    </div>
+    <div class="notes">
+      <p>Системная шторка с панелью «Отмена / Сохранить». Название, четыре числа на 100 г крупно с цветной буквой под каждым, вес порции. Одна шторка на четыре случая: новый продукт, правка своего, после фото этикетки (числа подставлены), после неизвестного штрихкода (с подсказкой сверху). Фокус сразу в первом пустом поле.</p>
+      <details class="code"><summary>Код · <code>UI/NewFoodSheet.swift</code></summary><pre><code>    private func numberField(_ value: Binding&lt;String&gt;, _ label: String, _ color: Color, _ field: Field) -&gt; some View {
+        VStack(alignment: .leading, spacing: 2) {
+            TextField(&quot;0&quot;, text: value)
+                .font(.largeTitle)
+                .monospacedDigit()
+                .keyboardType(.decimalPad)
+                .focused($focus, equals: field)
+            Text(label)
+                .font(.subheadline)
+                .foregroundStyle(color)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }</code></pre></details>
+    </div>
+  </div>
+</section>
+
+<section id="icons">
+  <h2>Иконки</h2>
+  <p>SF Symbols — родные знаки iOS, в залитом варианте там, где он есть. Свои иконки появятся вместе с дизайном; пока список того, что стоит, и где.</p>
+  <table class="icons">
+    <tr><th>SF Symbol</th><th>Где</th></tr>
+    <tr><td>line.3.horizontal</td><td>Меню, слева в шапке дневника</td></tr>
+    <tr><td>camera.fill · mic.fill</td><td>Строка ввода; микрофон во время диктовки — акцентным цветом, с пульсацией</td></tr>
+    <tr><td>xmark.circle.fill</td><td>Очистить строку</td></tr>
+    <tr><td>barcode.viewfinder · camera · photo</td><td>Меню камеры: штрихкод, этикетка, фото</td></tr>
+    <tr><td>pencil · trash</td><td>Меню записи и продукта: изменить, удалить</td></tr>
+    <tr><td>person.fill · chart.bar.fill · bookmark.fill</td><td>Меню: профиль, статистика, мои продукты</td></tr>
+    <tr><td>plus · carrot · frying.pan</td><td>«Мои продукты»: добавить — продукт, блюдо</td></tr>
+    <tr><td>square.and.arrow.up · square.and.arrow.down</td><td>Профиль: сохранить копию, восстановить</td></tr>
+  </table>
+</section>
+
+<section id="howto">
+  <h2>Как править</h2>
+  <p>Источник правды — код приложения в <code>apps/ios/Krug</code>. Эта страница собирается из него скриптом, поэтому менять нужно код, а не страницу:</p>
+  <ol>
+    <li><b>Цвета</b> — <code>UI/Palette.swift</code>: пара hex для светлой и тёмной темы на каждый токен.</li>
+    <li><b>Шрифт</b> — только системные стили (<code>.title3</code>, <code>.body</code>…); размеры в пунктах не задаются.</li>
+    <li><b>Компоненты</b> — файлы в <code>UI/</code>; код под компонентами на этой странице берётся из них при сборке.</li>
+    <li><b>Текст страницы</b> — <code>design-system/src/index.template.html</code>; стили — <code>style.css</code>.</li>
+  </ol>
+  <p>Пересобрать: <code>python3 design-system/tools/build.py</code>. Хук перед коммитом не пропустит устаревшую страницу. Опубликованная версия обновляется при каждом пуше в <code>main</code>.</p>
+</section>
+
+</main>
+
+<footer>
+  <main style="padding-top:0">Круг · дизайн-система · сборка 6b4f4c9 · <a href="https://github.com/novanikita/krug">github.com/novanikita/krug</a></main>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
