@@ -5,16 +5,16 @@
   --surfaceMuted: #ededf0;
   --text: #111114;
   --textSecondary: #696971;
-  --textTertiary: #858590;
-  --accent: #235af5;
+  --textTertiary: #8d8d97;
+  --accent: #3b6cf6;
   --kcal: #5db523;
   --protein: #f2626c;
   --fat: #f2a63b;
   --carbs: #4e8af4;
-  --kcalInk: #3d7717;
-  --proteinInk: #d2111f;
-  --fatInk: #975c0a;
-  --carbsInk: #0f5fec;
+  --kcalInk: #519d1e;
+  --proteinInk: #f15661;
+  --fatInk: #c97b0d;
+  --carbsInk: #4e8af4;
   --track-alpha: 0.2;
 }
 [data-theme=dark] {
