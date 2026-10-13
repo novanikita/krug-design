@@ -374,43 +374,10 @@ struct GhostField: View {
     <div class="notes">
       <p>Скрытая функция: раскрывается тапом по серому тексту подсказки или коротким свайпом вниз по строке. Сначала то, что уже записывали, затем точные совпадения, затем с опечаткой; одна строка на название. Тап по строке ставит название в поле — дальше как обычно.</p>
       <details class="code"><summary>Код · <code>UI/DiaryView.swift</code></summary><pre><code>    private var matchList: some View {
-        let items = matches
-        return VStack(alignment: .leading, spacing: 0) {
-            ForEach(items) { f in
-                Button {
-                    closeList()
-                    pick(f)
-                } label: {
-                    HStack(alignment: .firstTextBaseline, spacing: 8) {
-                        Text(f.name(for: store.lang.rawValue))
-                            .foregroundStyle(Palette.text)
-                        if let brand = f.brand {
-                            Text(brand)
-                                .foregroundStyle(Palette.textTertiary)
-                                .lineLimit(1)
-                        }
-                        Spacer(minLength: 12)
-                        Text(formatKcal(f.per100g.kcal))
-                            .monospacedDigit()
-                            .foregroundStyle(Palette.textSecondary)
-                    }
-                    .font(.body)
-                    .padding(.vertical, 8)
-                    .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-            }
-            if items.isEmpty {
-                Text(&quot;Других вариантов нет&quot;)
-                    .font(.subheadline)
-                    .foregroundStyle(Palette.textSecondary)
-                    .padding(.vertical, 8)
-            }
+        MatchList(items: matches) { f in
+            closeList()
+            pick(f)
         }
-        .padding(.top, 6)
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier(&quot;matchList&quot;)
-        .transition(.opacity.combined(with: .move(edge: .top)))
     }</code></pre></details>
     </div>
   </div>
@@ -449,22 +416,30 @@ struct StadiumRings&lt;Content: View&gt;: View {
 
     var body: some View {
         ZStack {
-            ForEach(rings.indices, id: \.self) { i in
-                let ring = rings[i]
-                let inset = strokeWidth / 2 + CGFloat(i) * (strokeWidth + gap)
-                let p = max(0, ring.progress)
-                let style = StrokeStyle(lineWidth: strokeWidth, lineCap: .round)
-                ZStack {
-                    StadiumShape(inset: inset).stroke(Palette.track(ring.color, dark: scheme == .dark), style: style)
-                    StadiumShape(inset: inset).trim(from: 0, to: min(p, 1)).stroke(ring.color, style: style)
-                    // Second lap: drawn over the full ring with a soft shadow
-                    // ahead of its tip, so its end stays visible.
-                    StadiumShape(inset: inset)
-                        .trim(from: 0, to: min(max(p - 1, 0), 0.999))
-                        .stroke(ring.color, style: style)
-                        .shadow(color: .black.opacity(p &gt; 1 ? 0.45 : 0), radius: strokeWidth * 0.3)
+            ZStack {
+                ForEach(rings.indices, id: \.self) { i in
+                    let ring = rings[i]
+                    let inset = strokeWidth / 2 + CGFloat(i) * (strokeWidth + gap)
+                    let p = max(0, ring.progress)
+                    let style = StrokeStyle(lineWidth: strokeWidth, lineCap: .round)
+                    let shape = StadiumShape(inset: inset)
+                    ZStack {
+                        shape.stroke(Palette.track(ring.color, dark: scheme == .dark), style: style)
+                        shape.trim(from: 0, to: min(p, 1)).stroke(ring.color, style: style)
+                        // Second lap over the full ring. The lap&#x27;s end would
+                        // vanish against the same colour underneath, so a
+                        // short blurred dark stretch of the path sits just
+                        // ahead of its tip — only there, never along the
+                        // ring. Both are always present and trimmed, so they
+                        // sweep along the path as the value animates.
+                        let over = min(max(p - 1, 0), 0.999)
+                        shape.trim(from: over, to: min(over + 0.012, 1))
+                            .stroke(.black.opacity(p &gt; 1 ? 0.45 : 0), style: style)
+                            .blur(radius: strokeWidth * 0.3)
+                        shape.trim(from: 0, to: over).stroke(ring.color, style: style)
+                    }
+                    .animation(.easeOut(duration: 0.65), value: p)
                 }
-                .animation(.easeOut(duration: 0.65), value: p)
             }
             content
                 .padding(CGFloat(rings.count) * (strokeWidth + gap) + 4)
@@ -645,14 +620,11 @@ func ringsFor(_ n: Nutrition, targets: Nutrition) -&gt; [StadiumRing] {
         StadiumRing(progress: ratio(n.carbs, targets.carbs), color: Palette.carbs),
     ]
 }</code></pre></details>
-      <details class="code"><summary>Код · <code>UI/StatsView.swift</code></summary><pre><code>    private func tile(_ label: String, _ value: String, _ unit: String, goal: String, color: Color) -&gt; some View {
+      <details class="code"><summary>Код · <code>UI/StatsView.swift</code></summary><pre><code>    private func tile(_ label: String, _ value: String, color: Color) -&gt; some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(label).font(.subheadline).foregroundStyle(Palette.textSecondary)
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text(value).font(.title.weight(.medium)).monospacedDigit().foregroundStyle(color)
-                Text(unit).font(.subheadline).foregroundStyle(Palette.textSecondary)
-            }
-            Text(&quot;цель \(goal)&quot;).font(.footnote).foregroundStyle(Palette.textSecondary)
+            Text(value).font(.title.weight(.medium)).monospacedDigit().foregroundStyle(color)
+                .contentTransition(.numericText())
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 16)
