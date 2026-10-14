@@ -37,7 +37,7 @@
 
   <h3>Правила, которые уже приняты</h3>
   <div class="rule"><b>Запись — плоский список.</b> Никаких завтраков и обедов: это лишний тап в самом частом сценарии. Время записи хранится, но не показывается.</div>
-  <div class="rule"><b>Одна подсказка, не список.</b> Строка ввода дописывает набранное серым, как адресная строка браузера. Список совпадений появляется только по просьбе: тап по серому тексту или свайп вниз по строке.</div>
+  <div class="rule"><b>Одна подсказка, не список.</b> Строка ввода дописывает набранное серым, как адресная строка браузера. Список совпадений появляется только по просьбе: тап по серому тексту; тот же тап его прячет.</div>
   <div class="rule"><b>Строка читается как предложение.</b> «Творог 5% 150 грамм», единицы полными словами с согласованием, число справа — табличными цифрами.</div>
   <div class="rule"><b>Никаких приблизительных КБЖУ.</b> Если у продукта нет данных — справочный «средний» продукт того же типа, а не догадка.</div>
   <div class="rule"><b>Системные элементы — системные.</b> Поле ввода, клавиатура, листы действий, меню по долгому нажатию, навигация — родные iOS, без копий. Своё рисуем только там, где у системы этого нет: кольца, пилюля, подсказка.</div>
@@ -94,6 +94,14 @@
     static let proteinInk = dynamic(0xF15661, 0xFF7A82)
     static let fatInk = dynamic(0xC97B0D, 0xFFB454)
     static let carbsInk = dynamic(0x4E8AF4, 0x6B9FFF)
+
+    /// Over the camera&#x27;s viewfinder, whatever the theme: it is always dark.
+    static let onCamera = Color.white
+    static let cameraBackdrop = Color.black
+
+    /// The shadow a stadium ring&#x27;s tip casts on the ring under it when it
+    /// laps the track (over 100%).
+    static let ringShadow = Color.black.opacity(0.45)
 
     /// A ring&#x27;s unfilled track: its own hue, dimmed.
     static func track(_ ring: Color, dark: Bool) -&gt; Color { ring.opacity(dark ? 0.28 : 0.2) }
@@ -155,6 +163,7 @@
     <div><i style="width:20px;height:20px"></i>20</div>
     <div><i style="width:24px;height:24px"></i>24</div>
     <div><i style="width:28px;height:28px"></i>28</div>
+    <div><i style="width:32px;height:32px"></i>32</div>
   </div>
   <table style="margin-top:20px">
     <tr><th>Значение</th><th>Где</th></tr>
@@ -169,7 +178,7 @@
   <h3>Скругления и толщины</h3>
   <table>
     <tr><th>Форма</th><th>Значение</th></tr>
-    <tr><td>Плитка статистики</td><td>радиус 20, непрерывное (continuous) скругление</td></tr>
+    <tr><td>Карточки: плитки статистики, плашки редактора блюда</td><td>радиус 20, непрерывное (continuous) скругление</td></tr>
     <tr><td>Пилюля, плашка, кнопки шторки</td><td>капсула (радиус = половина высоты)</td></tr>
     <tr><td>Стадион на главном</td><td>четыре кольца, толщина 13, зазор 3</td></tr>
     <tr><td>Кольца статистики</td><td>толщина 24, зазор 5</td></tr>
@@ -182,12 +191,13 @@
   <h2>Движение</h2>
   <p>Анимаций мало, и каждая отвечает за одно: показать, что изменилось. Кольца едут от прошлого значения, а не от нуля; список совпадений выезжает, а не вспыхивает; страница дня при возврате к «Сегодня» доезжает за треть секунды. Нажмите на карточку, чтобы проиграть.</p>
   <div class="motion">
-    <div class="demo"><div class="what">Кольца стадиона</div><div class="how">easeOut · 0.65 s · от прошлого значения</div><div class="stage"><div class="ball ease65"></div></div></div>
-    <div class="demo"><div class="what">Кольца статистики</div><div class="how">easeOut · 0.7 s</div><div class="stage"><div class="ball ease65"></div></div></div>
-    <div class="demo"><div class="what">Пилюля Д/Н/М</div><div class="how">snappy · 0.22 s · matchedGeometry</div><div class="stage"><div class="ball ease22"></div></div></div>
-    <div class="demo"><div class="what">Список совпадений, запись, удаление</div><div class="how">snappy · 0.25 s · opacity + move(.top)</div><div class="stage"><div class="ball snappy"></div></div></div>
-    <div class="demo"><div class="what">Возврат к «Сегодня», переход к дню из меню</div><div class="how">easeOut · 0.35 s</div><div class="stage"><div class="ball ease35"></div></div></div>
-    <div class="demo"><div class="what">Панель колец при фокусе на строке</div><div class="how">easeOut · 0.2 s · opacity</div><div class="stage"><div class="ball ease22"></div></div></div>
+    <div class="demo"><div class="what">Кольца стадиона</div><div class="how">easeOut · 0.65 s · от прошлого значения · <code>Motion.stadium</code></div><div class="stage"><div class="ball" style="--d:0.65s;--curve:cubic-bezier(.22,.61,.36,1)"></div></div></div>
+    <div class="demo"><div class="what">Кольца статистики</div><div class="how">easeOut · 0.7 s · <code>Motion.rings</code></div><div class="stage"><div class="ball" style="--d:0.7s;--curve:cubic-bezier(.22,.61,.36,1)"></div></div></div>
+    <div class="demo"><div class="what">Пилюля Д/Н/М</div><div class="how">snappy · 0.22 s · matchedGeometry · <code>Motion.pill</code></div><div class="stage"><div class="ball" style="--d:0.22s;--curve:cubic-bezier(.2,.9,.3,1.05)"></div></div></div>
+    <div class="demo"><div class="what">Список совпадений, запись, удаление, смена периода</div><div class="how">snappy · 0.25 s · opacity + move(.top) · <code>Motion.reveal</code></div><div class="stage"><div class="ball" style="--d:0.25s;--curve:cubic-bezier(.2,.9,.3,1.05)"></div></div></div>
+    <div class="demo"><div class="what">Возврат к «Сегодня», переход к дню из меню</div><div class="how">easeOut · 0.35 s · <code>Motion.page</code></div><div class="stage"><div class="ball" style="--d:0.35s;--curve:cubic-bezier(.22,.61,.36,1)"></div></div></div>
+    <div class="demo"><div class="what">Панель колец при фокусе на строке</div><div class="how">easeOut · 0.2 s · opacity · <code>Motion.panel</code></div><div class="stage"><div class="ball" style="--d:0.2s;--curve:cubic-bezier(.22,.61,.36,1)"></div></div></div>
+    <div class="demo"><div class="what">Число, меняющееся на месте</div><div class="how">snappy · 0.5 s · contentTransition(.numericText()) · <code>Motion.number</code></div><div class="stage"><div class="ball" style="--d:0.5s;--curve:cubic-bezier(.2,.9,.3,1.05)"></div></div></div>
   </div>
   <h3>Отклик</h3>
   <table>
@@ -452,11 +462,11 @@ struct StadiumRings&lt;Content: View&gt;: View {
                         // sweep along the path as the value animates.
                         let over = min(max(p - 1, 0), 0.999)
                         shape.trim(from: over, to: min(over + 0.012, 1))
-                            .stroke(.black.opacity(p &gt; 1 ? 0.45 : 0), style: style)
+                            .stroke(Palette.ringShadow.opacity(p &gt; 1 ? 1 : 0), style: style)
                             .blur(radius: strokeWidth * 0.3)
                         shape.trim(from: 0, to: over).stroke(ring.color, style: style)
                     }
-                    .animation(.easeOut(duration: 0.65), value: p)
+                    .animation(Motion.stadium, value: p)
                 }
             }
             content
@@ -512,7 +522,7 @@ struct StadiumShape: Shape {
                 .monospacedDigit()
                 .foregroundStyle(Palette.text)
                 .contentTransition(.numericText())
-                .animation(.snappy, value: total)
+                .animation(Motion.number, value: total)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
             }
@@ -553,7 +563,7 @@ struct PeriodToggle: View {
                         }
                     }
                     .contentShape(Rectangle())
-                    .onTapGesture { withAnimation(.snappy(duration: 0.22)) { period = p } }
+                    .onTapGesture { withAnimation(Motion.pill) { period = p } }
                     .accessibilityLabel(p.fullName)
                     .accessibilityAddTraits(p == period ? [.isButton, .isSelected] : .isButton)
             }
@@ -622,7 +632,7 @@ struct ActivityRings&lt;Content: View&gt;: View {
                     .trim(from: 0, to: p)
                     .stroke(ring.color, style: StrokeStyle(lineWidth: strokeWidth, lineCap: .round))
                     .rotationEffect(.degrees(-90))
-                    .animation(.easeOut(duration: 0.7), value: p)
+                    .animation(Motion.rings, value: p)
             }
             content
         }
@@ -649,7 +659,7 @@ func ringsFor(_ n: Nutrition, targets: Nutrition) -&gt; [StadiumRing] {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 16)
         .padding(.vertical, 14)
-        .background(Palette.surface, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .accessibilityElement(children: .combine)
     }</code></pre></details>
     </div>
@@ -844,10 +854,13 @@ private struct ActivityView: UIViewControllerRepresentable {
   <p>Источник правды — код приложения в <code>apps/ios/Krug</code>. Эта страница собирается из него скриптом, поэтому менять нужно код, а не страницу:</p>
   <ol>
     <li><b>Цвета</b> — <code>UI/Palette.swift</code>: пара hex для светлой и тёмной темы на каждый токен.</li>
+    <li><b>Отступы, радиус, движение</b> — <code>UI/Style.swift</code>: шкала <code>Space.scale</code>, радиус <code>Radius.card</code>, анимации <code>Motion.…</code>. Шкала и карточки движения выше берутся оттуда.</li>
     <li><b>Шрифт</b> — только системные стили (<code>.title3</code>, <code>.body</code>…); размеры в пунктах не задаются.</li>
     <li><b>Компоненты</b> — файлы в <code>UI/</code>; код под компонентами на этой странице берётся из них при сборке.</li>
     <li><b>Текст страницы</b> — <code>design-system/src/index.template.html</code>; стили — <code>style.css</code>.</li>
   </ol>
+  <h3>Железное правило</h3>
+  <p>Экран не может взять цвет, отступ, радиус или анимацию «из головы». <code>design-system/tools/lint.py</code> читает каждый Swift-файл приложения и не пропускает: цвет, созданный на месте, или системный (<code>.gray</code>, <code>.white</code>…) вместо токена Palette; размер шрифта в пунктах; отступ не из шкалы; радиус числом; анимацию не из <code>Motion</code>; хаптику не из таблицы выше. Он запускается хуком перед каждым коммитом и в CI — коммит с нарушением не проходит.</p>
   <p>Пересобрать: <code>python3 design-system/tools/build.py</code>. Хук перед коммитом не пропустит устаревшую страницу. Опубликованная версия обновляется при каждом пуше в <code>main</code>.</p>
 </section>
 

@@ -154,10 +154,8 @@ details.code pre { margin-top: 10px; max-height: 480px; }
 .demo .how { font-size: 13px; color: var(--textSecondary); font-family: var(--mono); margin: 2px 0 12px; }
 .demo .stage { height: 44px; position: relative; }
 .demo .ball { position: absolute; left: 0; top: 10px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); }
-.demo.play .ball.snappy { transition: transform .25s cubic-bezier(.2,.9,.3,1.05); transform: translateX(220px); }
-.demo.play .ball.ease35 { transition: transform .35s cubic-bezier(.22,.61,.36,1); transform: translateX(220px); }
-.demo.play .ball.ease65 { transition: transform .65s cubic-bezier(.22,.61,.36,1); transform: translateX(220px); }
-.demo.play .ball.ease22 { transition: transform .22s cubic-bezier(.2,.9,.3,1.05); transform: translateX(220px); }
+/* Duration and curve come from Style.swift (see build.py): --d and --curve on each ball. */
+.demo.play .ball { transition: transform var(--d) var(--curve); transform: translateX(220px); }
 
 /* Icons table */
 .icons td:first-child { font-family: var(--mono); font-size: 13px; }
