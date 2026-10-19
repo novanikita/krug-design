@@ -231,11 +231,22 @@
             Text(e.line(lang: store.lang))
                 .foregroundStyle(Palette.text)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text(metric.value(e))
-                .monospacedDigit()
-                .foregroundStyle(metric.color)
-                .contentTransition(.numericText())
-                .accessibilityLabel(&quot;\(metric.fullName) \(metric.value(e))&quot;)
+            if e.counted {
+                Text(metric.value(e))
+                    .monospacedDigit()
+                    .foregroundStyle(metric.color)
+                    .contentTransition(.numericText())
+                    .accessibilityLabel(&quot;\(metric.fullName) \(metric.value(e))&quot;)
+            } else {
+                // No product yet: the numbers are a question, and a tap picks one.
+                Text(verbatim: &quot;?&quot;)
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(Palette.textSecondary)
+                    .frame(minWidth: 30, minHeight: 30)
+                    .background(Palette.surfaceMuted, in: Circle())
+                    .accessibilityLabel(L(&quot;Не посчитано&quot;))
+                    .accessibilityIdentifier(&quot;uncounted&quot;)
+            }
         }
         .font(.title3)
         .padding(.horizontal, 24)
@@ -327,15 +338,28 @@ struct GhostField: View {
             }
             // Vertical axis: a long line wraps like the logged lines do. Its
             // Return key would insert a newline, so a newline means &quot;submit&quot;.
+            // A pasted list (&quot;курица 100⏎рис 50&quot;) keeps one food per line,
+            // as &quot;; &quot; — the separator that always splits (see splitLine).
             TextField(&quot;Введите продукт…&quot;, text: $text, axis: .vertical)
                 .focused(focus)
                 .accessibilityIdentifier(&quot;line&quot;)
                 .submitLabel(.go)
                 .autocorrectionDisabled()
                 .foregroundStyle(Palette.text)
-                .onChange(of: text) { _, new in
-                    guard new.contains(&quot;\n&quot;) else { return }
-                    let line = new.replacingOccurrences(of: &quot;\n&quot;, with: &quot;&quot;)
+                .onChange(of: text) { old, new in
+                    let breaks = new.filter(\.isNewline).count
+                    guard breaks &gt; 0 else { return }
+                    let line = new.filter { !$0.isNewline }
+                    // Return: one newline, at the end or just put in where the
+                    // caret was. Anything else came pasted.
+                    let isReturn = breaks == 1 &amp;&amp; (new.last?.isNewline == true || line == old)
+                    if !isReturn {
+                        text = new.split(whereSeparator: \.isNewline)
+                            .map { $0.trimmingCharacters(in: .whitespaces) }
+                            .filter { !$0.isEmpty }
+                            .joined(separator: &quot;; &quot;)
+                        return
+                    }
                     text = line
                     if line.trimmingCharacters(in: .whitespaces).isEmpty {
                         focus.wrappedValue = false
